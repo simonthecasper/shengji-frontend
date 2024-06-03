@@ -34,10 +34,6 @@ function AppServerConnection() {
         setValue(value + 1);
     };
 
-    /*
-        useeffect array?
-    */
-
     useEffect(() => {
         sc.on("server_message", (data) => {
             console.log("Message received from server...");

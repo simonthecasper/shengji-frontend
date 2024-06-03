@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 let socketConnection = io();
 
 export function initSocketConnection() {
-    if (!socketConnection.connected) {
+    if (!isConnected()) {
         console.log("Creating connection");
         socketConnection = io("ws://localhost:12123");
     } else {
@@ -14,6 +14,10 @@ export function initSocketConnection() {
 
 export function sendData(event, data) {
     socketConnection.emit(event, data);
+}
+
+export function isConnected() {
+    return socketConnection.connected;
 }
 
 export { socketConnection };

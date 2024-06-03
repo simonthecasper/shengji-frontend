@@ -1,0 +1,8 @@
+Shengji-Frontend
+
+- Syncronize message vocab with backend
+
+- Make general message handler
+-- Make specific message handlers
+
+- Be able to display all the information received from backend
