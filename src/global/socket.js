@@ -6,7 +6,7 @@ let socketConnection = io();
 export function initSocketConnection() {
     if (!isConnected()) {
         console.log("Creating connection");
-        socketConnection = io("ws://localhost:12123");
+        socketConnection = io("ws://localhost:2500");
     } else {
         console.log("Already connected.")
     }

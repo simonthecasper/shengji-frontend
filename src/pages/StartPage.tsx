@@ -9,7 +9,7 @@ interface Props {
     setUsername: (item: string) => void;
 }
 
-function StartPage({ username, setUsername }: Props) {
+function StartPage ({ username, setUsername }: Props) {
     const [rerender, doRerender] = useState(0);
 
     const [joinSessionID, updateJoinSessionID] = useState("");
@@ -37,6 +37,7 @@ function StartPage({ username, setUsername }: Props) {
             sendData("test_message", {
                 stage: "prelobby",
                 task: "new_session",
+                username
             });
         }
     };
@@ -51,6 +52,7 @@ function StartPage({ username, setUsername }: Props) {
                 stage: "prelobby",
                 task: "join_session",
                 session_id: joinSessionID,
+                username
             };
 
             sendData("test_message", message_dict);
