@@ -3,31 +3,36 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { initSocketConnection, sendData, isConnected } from "../global/socket";
 import { socketConnection } from "../global/socket";
+import { useAtom } from "jotai";
+import {userAtom} from "../store/store.ts";
 
-interface Props {
-    username: string;
-    setUsername: (item: string) => void;
-}
 
-function StartPage({ username, setUsername }: Props) {
-    const [rerender, doRerender] = useState(0);
+
+function StartPage() {
+
+    const [user, setUser] = useAtom(userAtom);
+    // const [connectToServer, setConnectToServer] = useAtom(connectToServerAtom);
+    // const [rerender, doRerender] = useState(0);
+
+    // useEffect(() => {
+    //     console.log("StartPage rerendered");
+    // }, [rerender]);
 
     const [joinSessionID, updateJoinSessionID] = useState("");
 
-    let sc = socketConnection;
+    const sc = socketConnection;
 
     const setNameAndConnectServer = () => {
-        if (username.length == 0) {
+        if (user.username.length == 0) {
             alert("Please enter a username.");
             return;
-        } else if (username.length > 20) {
+        } else if (user.username.length > 20) {
             alert("Please enter a shorter username");
             return;
         }
-        console.log(username);
+        console.log(user.username);
 
         initSocketConnection();
-        doRerender(rerender + 1);
     };
 
     const createSession = () => {
@@ -37,7 +42,7 @@ function StartPage({ username, setUsername }: Props) {
             sendData("test_message", {
                 stage: "prelobby",
                 task: "new_session",
-                username: username,
+                username: user.username
             });
         }
     };
@@ -48,7 +53,7 @@ function StartPage({ username, setUsername }: Props) {
         } else if (joinSessionID.length != 4) {
             alert("The provided ID is not the correct length.");
         } else {
-            let message_dict = {
+            const message_dict = {
                 stage: "prelobby",
                 task: "join_session",
                 session_id: joinSessionID,
@@ -74,12 +79,13 @@ function StartPage({ username, setUsername }: Props) {
     }, [socketConnection]);
 
     const usernameChange = (event: { target: { value: any } }) => {
-        setUsername(event.target.value);
+        // setUsername(event.target.value);
+        setUser({username: event.target.value});
     };
 
     return (
         <div className="StartPage">
-            <input name="username" value={username} onChange={usernameChange} />
+            <input name="username" value={user.username} onChange={usernameChange} />
             <button onClick={setNameAndConnectServer}>Set Name</button>
             <br />
             <br />
