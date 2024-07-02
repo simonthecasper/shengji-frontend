@@ -37,6 +37,7 @@ function StartPage({ username, setUsername }: Props) {
             sendData("test_message", {
                 stage: "prelobby",
                 task: "new_session",
+                username: username,
             });
         }
     };
@@ -51,6 +52,7 @@ function StartPage({ username, setUsername }: Props) {
                 stage: "prelobby",
                 task: "join_session",
                 session_id: joinSessionID,
+                username: username,
             };
 
             sendData("test_message", message_dict);
