@@ -1,5 +1,5 @@
-import {atom} from 'jotai/vanilla'
-
-export const userAtom = atom({username: ""});
+import { atom } from 'jotai/vanilla'
+//{username: ""}
+export const userAtom = atom('');
 export const isConnectedAtom = atom(false);
 export const connectToServerAtom = atom(false)
