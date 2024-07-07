@@ -9,9 +9,9 @@ function StartPage() {
 
     const [user, setUser] = useAtom(userAtom);
 
-    const usernameChange = (event: { target: { value: never } }) => {
+    const usernameChange = (name: string) => {
         // setUsername(event.target.value);
-        setUser(event.target.value);
+        setUser(name);
     };
     const setNameAndConnectServer = () => {
         if (user.length == 0) {
@@ -29,8 +29,7 @@ function StartPage() {
     return <>
 
         <input name="username" value={user}
-            onChange={usernameChange}
-        />
+            onChange={(e)=>{usernameChange(e.target?.value) }}/>
         <button onClick={setNameAndConnectServer}>Set Name</button>
     </>;
 }

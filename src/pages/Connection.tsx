@@ -20,7 +20,7 @@ function Connection() {
       sendData("test_message", {
         stage: "prelobby",
         task: "new_session",
-        username: user.username
+        username: user
       });
     }
   };
@@ -34,7 +34,7 @@ function Connection() {
         stage: "prelobby",
         task: "join_session",
         session_id: joinSessionID,
-        username: user.username,
+        username: user,
       };
 
       sendData("test_message", message_dict);
