@@ -25,9 +25,12 @@ function StartPage() {
 
         initSocketConnection();
     };
-    // @ts-ignore
+
     return <>
-        <input name="username" value={user.username} onChange={usernameChange}/>
+        
+        <input name="username" value={user.username}
+               onChange={usernameChange}
+        />
     <button onClick={setNameAndConnectServer}>Set Name</button>
     </>;
 }
