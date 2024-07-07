@@ -5,35 +5,19 @@ import { initSocketConnection, sendData, isConnected } from "../global/socket";
 import { socketConnection } from "../global/socket";
 import { useAtom } from "jotai";
 import {userAtom} from "../store/store.ts";
-
+import UserLogin from "./UserLogin.tsx";
 
 
 function StartPage() {
 
-    const [user, setUser] = useAtom(userAtom);
-    // const [connectToServer, setConnectToServer] = useAtom(connectToServerAtom);
-    // const [rerender, doRerender] = useState(0);
-
-    // useEffect(() => {
-    //     console.log("StartPage rerendered");
-    // }, [rerender]);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [user, _setUser] = useAtom(userAtom);
 
     const [joinSessionID, updateJoinSessionID] = useState("");
 
     const sc = socketConnection;
 
-    const setNameAndConnectServer = () => {
-        if (user.username.length == 0) {
-            alert("Please enter a username.");
-            return;
-        } else if (user.username.length > 20) {
-            alert("Please enter a shorter username");
-            return;
-        }
-        console.log(user.username);
 
-        initSocketConnection();
-    };
 
     const createSession = () => {
         if (!isConnected()) {
@@ -57,7 +41,7 @@ function StartPage() {
                 stage: "prelobby",
                 task: "join_session",
                 session_id: joinSessionID,
-                username: username,
+                username: user.username,
             };
 
             sendData("test_message", message_dict);
@@ -78,21 +62,16 @@ function StartPage() {
         // });
     }, [socketConnection]);
 
-    const usernameChange = (event: { target: { value: any } }) => {
-        // setUsername(event.target.value);
-        setUser({username: event.target.value});
-    };
 
     return (
         <div className="StartPage">
-            <input name="username" value={user.username} onChange={usernameChange} />
-            <button onClick={setNameAndConnectServer}>Set Name</button>
-            <br />
-            <br />
+            <UserLogin/>
+            <br/>
+            <br/>
 
             <button onClick={createSession}>Create Session</button>
-            <br />
-            <br />
+            <br/>
+            <br/>
             <input
                 name="joinSessionID_input"
                 value={joinSessionID}
