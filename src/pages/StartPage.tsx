@@ -37,9 +37,7 @@ function StartPage() {
 
     return (
         <div className="StartPage">
-            {
-                routeUser()
-            }
+            {routeUser()}
         </div>
     );
 }
