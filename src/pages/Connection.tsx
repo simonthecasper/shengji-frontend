@@ -1,7 +1,9 @@
-import {isConnected, sendData} from "../global/socket";
+import { isConnected, sendData } from "../global/socket";
 import { useState } from "react";
 import { useAtom } from "jotai";
-import {userAtom} from "../store/store.ts";
+import { userAtom } from "../store/store.ts";
+import WelcomeUser from "../components/WelcomeUser.tsx";
+
 function Connection() {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -42,17 +44,20 @@ function Connection() {
   };
 
   return (
+    <>
+      <WelcomeUser />
       <div>
-      <button onClick={createSession}>Create Session</button>
-    <br/>
-    <br/>
-    <input
-        name="joinSessionID_input"
-        value={joinSessionID}
-        onChange={changeJoinSessionID}
-    />
-    <button onClick={joinSession}>Join Session</button> </div>
-)
+        <button onClick={createSession}>Create Session</button>
+        <br />
+        <br />
+        <input
+          name="joinSessionID_input"
+          value={joinSessionID}
+          onChange={changeJoinSessionID}
+        />
+        <button onClick={joinSession}>Join Session</button> </div>
+    </>
+  )
 
 }
 
