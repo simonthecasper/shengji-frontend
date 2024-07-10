@@ -1,39 +1,16 @@
 // import React from "react";
 
-import { initSocketConnection } from "../global/socket";
-
-import { useAtom } from "jotai";
-import { userAtom } from "../store/store.ts";
-import { useState } from "react";
+import { useAtom, useSetAtom } from "jotai";
+import { inputAtom, setNameAndConnectServer } from "../store/store.ts";
 
 function StartPage() {
-
-    const [user, setUser] = useAtom(userAtom);
-    const [inputText, setInputText] = useState('');
-
-    const usernameChange = (name: string) => {
-        // setUsername(event.target.value);
-        setInputText(name);
-    };
-    const setNameAndConnectServer = () => {
-        if (inputText.length == 0) {
-            alert("Please enter a username.");
-            return;
-        } else if (inputText.length > 20) {
-            alert("Please enter a shorter username");
-            return;
-        } else {
-            setUser(inputText)
-        }
-        console.log('username: ', user);
-
-        initSocketConnection();
-    };
+    const [input, updateInput] = useAtom(inputAtom)
+    const setName = useSetAtom(setNameAndConnectServer)
 
     return <>
-        <input name="username" value={inputText}
-            onChange={(e) => { usernameChange(e.target?.value) }} />
-        <button onClick={setNameAndConnectServer}>Set Name</button>
+        <input name="username" value={input}
+            onChange={ e => updateInput(e.target?.value)} />
+        <button onClick={setName}>Set Name</button>
     </>;
 }
 
