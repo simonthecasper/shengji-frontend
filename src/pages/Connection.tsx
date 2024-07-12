@@ -11,7 +11,7 @@ function Connection() {
 
   const [joinSessionID, updateJoinSessionID] = useState("");
 
-  //@ts-ignore
+  // @ts-ignore
   const changeJoinSessionID = (event: { target: { value: any } }) => {
     updateJoinSessionID(event.target.value);
   };
