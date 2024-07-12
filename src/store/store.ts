@@ -23,3 +23,13 @@ export const nameAndConnectServer = atom(
 );
 export const isConnectedAtom = atom(false);
 export const connectToServerAtom = atom(false)
+
+export const gamesAtom = atom(['orginal', 'test2', 'crazy_lvl'])
+export const selectedGameAtom = atom<string | null>(null, 
+	(get, set, selectedGame:string) => {
+		if(selectedGame in get(gamesAtom)){
+			set(selectedGame)
+		}
+	}
+)
+
