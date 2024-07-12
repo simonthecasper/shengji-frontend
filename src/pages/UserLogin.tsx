@@ -1,19 +1,23 @@
 // import React from "react";
 
 import { useSetAtom } from "jotai";
-import {  nameAndConnectServer  } from "../store/store.ts";
+import { nameAndConnectServer } from "../store/store.ts";
 import { useRef } from "react";
 
 function StartPage() {
     // const [input ] = useAtom(inputAtom)
     const setName = useSetAtom(nameAndConnectServer)
-    const input = useRef(null)
+    const input = useRef<HTMLInputElement>(null)
+
+    const handleClick = () => {
+        if (input.current) {
+            setName(input.current.value)
+        }
+    }
 
     return <>
-        <form action="">
-        <input name="username" ref={input}/>
-        <button onSubmit={ () => setName(input?.current)}></button>
-        </form >
+        <input name="username" ref={input} />
+        <button onClick={handleClick}>Set Name</button>
     </>;
 }
 
