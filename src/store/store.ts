@@ -3,7 +3,7 @@ import { atom } from 'jotai/vanilla'
 
 export const userAtom = atom(''); //{username: ""}
 export const inputAtom = atom('');
-export const setNameAndConnectServer = atom(
+export const nameAndConnectServer = atom(
 	() => '',
 	(get, set) => {
 		const userName = get(inputAtom)

@@ -1,11 +1,11 @@
 // import React from "react";
 
 import { useAtom, useSetAtom } from "jotai";
-import { inputAtom, setNameAndConnectServer } from "../store/store.ts";
+import { inputAtom, nameAndConnectServer  } from "../store/store.ts";
 
 function StartPage() {
     const [input, updateInput] = useAtom(inputAtom)
-    const setName = useSetAtom(setNameAndConnectServer)
+    const setName = useSetAtom(nameAndConnectServer)
 
     return <>
         <input name="username" value={input}
