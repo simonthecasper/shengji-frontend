@@ -25,11 +25,16 @@ export const isConnectedAtom = atom(false);
 export const connectToServerAtom = atom(false)
 
 export const gamesAtom = atom(['orginal', 'test2', 'crazy_lvl'])
-export const selectedGameAtom = atom<string | null>(null, 
-	(get, set, selectedGame:string) => {
-		if(selectedGame in get(gamesAtom)){
-			set(selectedGame)
+// Atom to hold the selected game, initially null
+// Atom to hold the selected game, initially null
+export const selectedGameAtom = atom<string | null>(null, // initial value
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	//@ts-expect-error
+	(get, set, selectedGame: string) => {
+		const games = get(gamesAtom);
+		if (games.includes(selectedGame)) {
+			set(selectedGameAtom, selectedGame);
 		}
 	}
-)
+);
 
