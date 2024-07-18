@@ -4,8 +4,9 @@ import { socketConnection } from "../global/socket";
 import UserLogin from "./UserLogin.tsx";
 import Connection from "./Connection.tsx";
 import { useAtomValue } from 'jotai'
-import {userAtom, isConnectedAtom, selectedGameAtom} from '../store/store.ts'
+import { userAtom, isConnectedAtom, selectedGameAtom } from '../store/store.ts'
 import GameSelectionPage from "./GameSelectionPage.tsx";
+import LobbyPage from "./LobbyPage.tsx";
 
 
 function StartPage() {
@@ -38,7 +39,7 @@ function StartPage() {
             toReturn = <GameSelectionPage />
         }
         else if (name && isConnected && selectedGame) {
-            toReturn = <h1>{selectedGame}</h1>
+            toReturn = <LobbyPage />
 
         }
         return toReturn

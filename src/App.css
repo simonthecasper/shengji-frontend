@@ -7,7 +7,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100dvh;
+    width: 100dvw;
     margin: 0;
 }
 
@@ -45,4 +46,19 @@ button:hover {
 
 button:active {
     background-color: #0d95e8;
+}
+
+#root {
+    width: 100dvw;
+}
+
+.StartPage {
+    display: flex;
+    justify-content: center;
+}
+
+#lobbyContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }
