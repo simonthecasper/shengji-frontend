@@ -1,5 +1,6 @@
 import { initSocketConnection } from "../global/socket";
 import { atom } from 'jotai/vanilla'
+import {GameTypes} from "../enums/GameTypes.ts";
 
 export const userAtom = atom<string>(''); //{username: ""}
 // export const inputAtom = atom('');
@@ -24,15 +25,17 @@ export const nameAndConnectServer = atom(
 export const isConnectedAtom = atom(false);
 export const connectToServerAtom = atom(false)
 
-export const gamesAtom = atom(['orginal', 'test2', 'crazy_lvl'])
+export const gamesAtom = atom([GameTypes.crazy_lvl, GameTypes.original, GameTypes.test2]);
 // Atom to hold the selected game, initially null
 // Atom to hold the selected game, initially null
 export const selectedGameAtom = atom(null, // initial value
 	(get, set, selectedGame: string) => {
 		const games = get(gamesAtom);
-		if (games.includes(selectedGame)) {
+		console.log('selectedGame: ', selectedGame);
+		if (games.map(x=>x.valueOf()).includes(selectedGame)) {
 			set(selectedGameAtom, selectedGame);
 		}
+
 	}
 );
 

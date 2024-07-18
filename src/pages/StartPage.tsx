@@ -37,6 +37,10 @@ function StartPage() {
         else if (name && isConnected && !selectedGame) {
             toReturn = <GameSelectionPage />
         }
+        else if (name && isConnected && selectedGame) {
+            toReturn = <h1>{selectedGame}</h1>
+
+        }
         return toReturn
     }
 
