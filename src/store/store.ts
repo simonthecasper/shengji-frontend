@@ -1,7 +1,7 @@
 import { initSocketConnection } from "../global/socket";
 import { atom } from 'jotai/vanilla'
 
-export const userAtom = atom(''); //{username: ""}
+export const userAtom = atom<string>(''); //{username: ""}
 // export const inputAtom = atom('');
 export const nameAndConnectServer = atom(
 	() => '',
@@ -27,9 +27,7 @@ export const connectToServerAtom = atom(false)
 export const gamesAtom = atom(['orginal', 'test2', 'crazy_lvl'])
 // Atom to hold the selected game, initially null
 // Atom to hold the selected game, initially null
-export const selectedGameAtom = atom<string | null>(null, // initial value
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	//@ts-expect-error
+export const selectedGameAtom = atom(null, // initial value
 	(get, set, selectedGame: string) => {
 		const games = get(gamesAtom);
 		if (games.includes(selectedGame)) {
