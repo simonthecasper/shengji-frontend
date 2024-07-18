@@ -1,25 +1,41 @@
 import { initSocketConnection } from "../global/socket";
 import { atom } from 'jotai/vanilla'
+import {GameTypes} from "../enums/GameTypes.ts";
 
-export const userAtom = atom(''); //{username: ""}
-export const inputAtom = atom('');
+export const userAtom = atom<string>(''); //{username: ""}
+// export const inputAtom = atom('');
 export const nameAndConnectServer = atom(
 	() => '',
-	(get, set) => {
-		const userName = get(inputAtom)
-		if (userName.length == 0) {
+	(get, set, input:string) => {
+		// const userName = get(userAtom)
+		if (input.length == 0) {
 			alert("Please enter a username.");
 			return;
-		} else if (userName.length > 20) {
+		} else if (input.length > 20) {
 			alert("Please enter a shorter username");
 			return;
 		} else {
-			set(userAtom, userName)
+			set(userAtom, input)
 		}
-		console.log('username: ', userName);
+		console.log('username: ', get(userAtom));
 
 		initSocketConnection();
 	}
 );
 export const isConnectedAtom = atom(false);
 export const connectToServerAtom = atom(false)
+
+export const gamesAtom = atom([GameTypes.crazy_lvl, GameTypes.original, GameTypes.test2]);
+// Atom to hold the selected game, initially null
+// Atom to hold the selected game, initially null
+export const selectedGameAtom = atom(null, // initial value
+	(get, set, selectedGame: string) => {
+		const games = get(gamesAtom);
+		console.log('selectedGame: ', selectedGame);
+		if (games.map(x=>x.valueOf()).includes(selectedGame)) {
+			set(selectedGameAtom, selectedGame);
+		}
+
+	}
+);
+
