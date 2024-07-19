@@ -27,17 +27,7 @@ export const connectToServerAtom = atom(false)
 
 export const gamesAtom = atom([GameTypes.crazy_lvl, GameTypes.original, GameTypes.test2]);
 // Atom to hold the selected game, initially null
-// Atom to hold the selected game, initially null
-export const selectedGameAtom = atom(null, // initial value
-	(get, set, selectedGame: string) => {
-		const games = get(gamesAtom);
-		console.log('selectedGame: ', selectedGame);
-		if (games.map(x => x.valueOf()).includes(selectedGame)) {
-			set(selectedGameAtom, selectedGame);
-		}
-
-	}
-);
+export const selectedGameAtom = atom<null | string>(null)
 
 export const listOfPlayersAtom = atom(['p1', 'p2', 'p3'])
 

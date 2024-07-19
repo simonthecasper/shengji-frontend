@@ -1,10 +1,10 @@
 
-import { useAtomValue, useSetAtom} from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { selectedGameAtom, gamesAtom } from '../store/store';
 
 export default function GameSelectionPage() {
 
-    const  setSelectedGame = useSetAtom(selectedGameAtom)
+    const setSelectedGame = useSetAtom(selectedGameAtom)
     const games = useAtomValue(gamesAtom)
 
     function selectGame(game: string) {
