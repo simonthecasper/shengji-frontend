@@ -9,7 +9,7 @@ const ListOfPlayers = () => {
             <ul>
                 {listOfPlayers.map(player => {
                     return (
-                        <li>{player}</li>
+                        <li key={player}>{player}</li>
                     )
                 })}
             </ul>
