@@ -77,3 +77,17 @@ button:active {
     font-size: 1.5rem;
     transition: all 150ms;
 }
+
+#connectionDiv,
+#welcomeDiv {
+    transition: opacity 2.5s ease-in-out;
+}
+
+.fade_in {
+    opacity: 1;
+}
+
+.fade_out {
+    opacity: 0;
+    display: none;
+}

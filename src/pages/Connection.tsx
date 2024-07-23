@@ -1,7 +1,7 @@
 import { sendData } from "../global/socket";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAtom } from "jotai";
-import {isConnectedAtom, userAtom} from "../store/store.ts";
+import { isConnectedAtom, userAtom } from "../store/store.ts";
 import WelcomeUser from "../components/WelcomeUser.tsx";
 
 function Connection() {
@@ -11,6 +11,17 @@ function Connection() {
   const [isConnected, setIsConnected] = useAtom(isConnectedAtom);
 
   const [joinSessionID, updateJoinSessionID] = useState("");
+  const [showFirstDiv, setShowFirstDiv] = useState(true)
+
+  useEffect(() => {
+    // Set a timer to transition after 30 seconds
+    const timer = setTimeout(() => {
+      setShowFirstDiv(false);
+    }, 5000); // 30000 milliseconds = 30 seconds
+
+    // Clean up the timer if the component is unmounted before the transition
+    return () => clearTimeout(timer);
+  }, []);
 
   const changeJoinSessionID = (event: { target: { value: string } }) => {
     updateJoinSessionID(event.target.value);
@@ -40,23 +51,23 @@ function Connection() {
       sendData("test_message", message_dict);
     }
   };
-
+  //  BUG: fix UI transitioning styling
   return (
     <>
-      <WelcomeUser />
-      <div>
-        <button onClick={createSession}>Create Session</button>
-        <br />
-        <br />
-        <input
-          name="joinSessionID_input"
-          value={joinSessionID}
-          onChange={changeJoinSessionID}
-        />
-        <button onClick={joinSession}>Join Session</button> </div>
+      {showFirstDiv ? <WelcomeUser /> :
+        <div id="connectionDiv" className="fade_in">
+          <button onClick={createSession}>Create Session</button>
+          <br />
+          <br />
+          <input
+            name="joinSessionID_input"
+            value={joinSessionID}
+            onChange={changeJoinSessionID}
+          />
+          <button onClick={joinSession}>Join Session</button> </div>
+      }
     </>
   )
-
 }
 
 export default Connection;

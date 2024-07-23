@@ -5,7 +5,7 @@ const WelcomeUser = () => {
   const user = useAtomValue(userAtom)
 
   return (
-    <h2>Welcome {user}</h2>
+    <div id="welcomeDiv" className="fade_out">Welcome {user}</div>
   )
 }
 
