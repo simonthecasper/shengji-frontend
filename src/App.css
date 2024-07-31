@@ -108,10 +108,10 @@ button:active {
 .gameTile {
     border-radius: 0;
     padding: 2rem;
+    transition: all 150ms;
 }
 
 .gameTile:hover {
     padding: 3rem;
     font-size: 1.5rem;
-    transition: all 150ms;
 }
