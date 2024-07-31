@@ -5,7 +5,7 @@ const WelcomeUser = () => {
   const user = useAtomValue(userAtom)
 
   return (
-    <h2>Welcome {user}</h2>
+    <h2 id="welcome">Welcome {user}</h2>
   )
 }
 

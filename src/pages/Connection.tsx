@@ -1,7 +1,7 @@
 import { sendData } from "../global/socket";
 import { useState } from "react";
 import { useAtom } from "jotai";
-import {isConnectedAtom, userAtom} from "../store/store.ts";
+import { isConnectedAtom, userAtom } from "../store/store.ts";
 import WelcomeUser from "../components/WelcomeUser.tsx";
 
 function Connection() {
@@ -44,7 +44,7 @@ function Connection() {
   return (
     <>
       <WelcomeUser />
-      <div>
+      <div id="sessionOptions">
         <button onClick={createSession}>Create Session</button>
         <br />
         <br />
