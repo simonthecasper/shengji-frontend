@@ -72,11 +72,11 @@ button:active {
 }
 
 @keyframes FadeOut {
-    0% {
+    from {
         opacity: 1;
     }
 
-    100% {
+    to {
         opacity: 0;
         /* display: none; */
     }
@@ -88,11 +88,11 @@ button:active {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: FadeOut 4s forwards;
+    animation: FadeOut 4s 2s forwards;
 }
 
 #sessionOptions {
-    animation: FadeIn 4s;
+    animation: FadeIn 4s 4s backwards;
 }
 
 #lobbyContainer {
