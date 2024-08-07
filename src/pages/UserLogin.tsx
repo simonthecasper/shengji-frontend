@@ -17,7 +17,7 @@ function StartPage() {
     }
 
     return <>
-        <input name="username" ref={input} />
+        <input name="username" className="baseInput" ref={input} />
         <button onClick={handleClick}>Set Name</button>
     </>;
 }

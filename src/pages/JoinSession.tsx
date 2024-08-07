@@ -1,0 +1,51 @@
+import { sendData } from "../global/socket.js";
+import { useState } from "react";
+import { useAtom } from "jotai";
+import { isConnectedAtom, userAtom } from "../store/store.ts";
+
+//  TODO: Wrong alert response to no value entered in input
+function JoinSession() {
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [user, _setUser] = useAtom(userAtom);
+  const [isConnected, setIsConnected] = useAtom(isConnectedAtom);
+
+  const [joinSessionID, updateJoinSessionID] = useState("");
+
+  const changeJoinSessionID = (event: { target: { value: string } }) => {
+    updateJoinSessionID(event.target.value);
+  };
+  const joinSession = () => {
+    if (!isConnected) {
+      alert("Please enter and set a username first");
+    } else if (joinSessionID.length != 4) {
+      alert("The provided ID is not the correct length.");
+    } else {
+      const message_dict = {
+        stage: "prelobby",
+        task: "join_session",
+        session_id: joinSessionID,
+        username: user,
+      };
+      setIsConnected(true);
+
+      sendData("test_message", message_dict);
+    }
+  };
+
+  return (
+    <>
+      <div id="sessionOptions">
+        <input
+          name="joinSessionID_input"
+          className="baseInput"
+          value={joinSessionID}
+          onChange={changeJoinSessionID}
+        />
+        <button onClick={joinSession}>Join Session</button> </div>
+    </>
+  )
+
+}
+
+export default JoinSession;
