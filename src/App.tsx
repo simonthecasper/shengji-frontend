@@ -1,4 +1,6 @@
 import { SetStateAction, useState } from "react";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import { useRoutes } from "hookrouter"
 import Start from "./pages/UserLogin";
 import Lobby from "./pages/Lobby";
