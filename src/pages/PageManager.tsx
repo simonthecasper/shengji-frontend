@@ -1,10 +1,10 @@
-import StartPage from "./StartPage";
+import StartPage from "./Start";
 
 function PageManager() {
 
     return (
         <div className="PageManager">
-            <StartPage/>
+            <StartPage />
         </div>
     );
 }
