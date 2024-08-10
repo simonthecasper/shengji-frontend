@@ -81,7 +81,7 @@ button:active {
 
     to {
         opacity: 0;
-        /* display: none; */
+        display: none;
     }
 }
 
@@ -95,7 +95,11 @@ button:active {
 }
 
 #sessionOptions {
-    animation: FadeIn 2s 1s backwards;
+    animation: FadeIn 2s 2s backwards;
+}
+
+#joinSessionContainer {
+    animation: FadeIn 2s backwards;
 }
 
 #lobbyContainer {

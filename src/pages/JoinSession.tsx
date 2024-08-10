@@ -35,7 +35,7 @@ function JoinSession() {
 
   return (
     <>
-      <div id="sessionOptions">
+      <div id="joinSessionContainer">
         <input
           name="joinSessionID_input"
           className="baseInput"
