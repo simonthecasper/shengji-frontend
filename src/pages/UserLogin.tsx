@@ -5,7 +5,7 @@ import { nameAndConnectServer } from "../store/store.ts";
 import { useRef } from "react";
 import '../App.css'
 
-function StartPage() {
+function UserLogin() {
     // const [input ] = useAtom(inputAtom)
     const setName = useSetAtom(nameAndConnectServer)
     const input = useRef<HTMLInputElement>(null)
@@ -16,10 +16,12 @@ function StartPage() {
         }
     }
 
-    return <>
-        <input name="username" className="baseInput" ref={input} />
-        <button onClick={handleClick}>Set Name</button>
-    </>;
+    return (
+        <div className="userLogin">
+            <input name="username" className="baseInput" ref={input} />
+            <button onClick={handleClick}>Set Name</button>
+        </div>
+    )
 }
 
-export default StartPage
+export default UserLogin;
