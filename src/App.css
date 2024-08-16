@@ -49,19 +49,15 @@ button:active {
 }
 
 #root,
-.PageManager {
+.StartPage {
     width: 100%;
     height: 100%;
 }
 
-.PageManager {
+.StartPage {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.StartPage {
-    display: flex;
 }
 
 @keyframes FadeIn {

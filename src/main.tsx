@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import PageManager from "./pages/PageManager";
+import StartPage from "./pages/StartPage";
 
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLDivElement).render(
     <React.StrictMode>
-        <PageManager />
+        <StartPage />
     </React.StrictMode>
 );
