@@ -41,3 +41,4 @@ export const selectedGameAtom = atom(null, // initial value
 
 export const listOfPlayersAtom = atom(['p1', 'p2', 'p3'])
 
+export const isGameConfiguredAtom = atom(false);
