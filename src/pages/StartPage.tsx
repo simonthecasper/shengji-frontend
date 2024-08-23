@@ -1,6 +1,6 @@
 
 import { useEffect, Fragment } from "react";
-import { socketConnection } from "../global/socket";
+import { socketConnection } from "../socket/socket";
 import UserLogin from "./UserLogin.tsx";
 import Connection from "./Connection.tsx";
 import { useAtomValue } from 'jotai'

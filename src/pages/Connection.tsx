@@ -1,4 +1,4 @@
-import { sendData } from "../global/socket";
+import { sendData } from "../socket/socket";
 import { useState } from "react";
 import { useAtom, useSetAtom } from "jotai";
 import { isConnectedAtom, userAtom } from "../store/store.ts";

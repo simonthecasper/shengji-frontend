@@ -1,4 +1,4 @@
-import { initSocketConnection } from "../global/socket";
+import { initSocketConnection } from "../socket/socket";
 import { atom } from 'jotai/vanilla'
 import { GameTypes } from "../enums/GameTypes.ts";
 
