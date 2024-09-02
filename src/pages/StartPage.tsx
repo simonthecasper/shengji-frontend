@@ -7,6 +7,7 @@ import { useAtomValue } from 'jotai'
 import { userAtom, isConnectedAtom, selectedGameAtom } from '../store/store.ts'
 import GameSelectionPage from "./GameSelectionPage.tsx";
 import LobbyPage from "./LobbyPage.tsx";
+import BaseGameLayer from "./BaseGameLayer.tsx";
 
 
 function StartPage() {
@@ -35,12 +36,8 @@ function StartPage() {
         else if (name && !isConnected) {
             toReturn = <Connection />
         }
-        else if (name && isConnected && !selectedGame) {
-            toReturn = <GameSelectionPage />
-        }
-        else if (name && isConnected && selectedGame) {
-            toReturn = <LobbyPage />
-
+        else if (name && isConnected) {
+            toReturn = <BaseGameLayer />
         }
         return toReturn
     }

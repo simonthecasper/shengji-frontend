@@ -13,17 +13,17 @@ const BaseGameLayer = () => {
   }
 
   return (
-    <div id="baseLayerContainer">
+    <div id="baseLayerContainer" className="fillContainer">
       <div id="navigationContainer">
-        <button></button>
+        <button>Placeholder txt</button>
         <div>
           <h1>Game Host Lobby</h1>
           <h2>Lobby ID</h2>
         </div>
-        <button></button>
+        <button>Placeholder txt</button>
       </div>
       {layerContent()}
-      <div>Chatbox</div>
+      <div id="chatBoxContainer">Chatbox</div>
     </div>
   )
 }

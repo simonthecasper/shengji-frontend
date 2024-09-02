@@ -4,6 +4,7 @@ interface Props {
     onClick: () => void;
 }
 
+//  TODO: Make a flexible component
 const Button = ({ children, color = "primary", onClick }: Props) => {
     return (
         <button className={"btn btn-" + color} onClick={onClick}>
