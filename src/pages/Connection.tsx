@@ -4,6 +4,7 @@ import { useAtom, useSetAtom } from "jotai";
 import { isConnectedAtom, userAtom } from "../store/store.ts";
 import WelcomeUser from "../components/WelcomeUser.tsx";
 import JoinSession from "./JoinSession.tsx";
+import Button from "../components/Button.tsx";
 
 function Connection() {
 
@@ -27,8 +28,8 @@ function Connection() {
     <>
       <WelcomeUser />
       <div id="sessionOptions">
-        <button onClick={createSession}>Create Session</button>
-        <button onClick={() => { setJoinSession(true) }}>Join Session</button>
+        <Button bg="primary" onClick={createSession}>Create Session</Button>
+        <Button bg="primary" onClick={() => { setJoinSession(true) }}>Join Session</Button>
         {}
       </div>
     </>

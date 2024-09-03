@@ -36,24 +36,43 @@ input[name="username"]::placeholder {
     color: #657786;
 }
 
-button {
+.btn {
+    --_inactiveBg: var(--inactiveBg);
+    --_hoverBg: var(--hoverBg);
+    --_activeBg: var(--activeBg);
     padding: 10px 20px;
     border: none;
-    border-radius: 25px;
-    background-color: #1DA1F2;
-    color: #ffffff;
-    font-size: 14px;
     cursor: pointer;
     outline: none;
-    margin-left: 10px;
+    border-radius: 25px;
+    background-color: var(--_inactiveBg);
+    color: #ffffff;
 }
 
-button:hover {
-    background-color: #1a8cd8;
+.btn:hover {
+    background-color: var(--_hoverBg);
 }
 
-button:active {
-    background-color: #0d95e8;
+.btn:active {
+    background-color: var(--_activeBg);
+}
+
+.primary {
+    --inactiveBg: #1DA1F2;
+    --hoverBg: #1a8cd8;
+    --activeBg: #0d95e8;
+}
+
+.secondary {
+    --inactiveBg: #30be45;
+    --hoverBg: #5faa6a;
+    --activeBg: #86f095;
+}
+
+.danger {
+    --inactiveBg: #f3185c;
+    --hoverBg: #ac4162;
+    --activeBg: #eb618c;
 }
 
 #root,

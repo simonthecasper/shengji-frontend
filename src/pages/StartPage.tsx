@@ -4,16 +4,13 @@ import { socketConnection } from "../socket/socket";
 import UserLogin from "./UserLogin.tsx";
 import Connection from "./Connection.tsx";
 import { useAtomValue } from 'jotai'
-import { userAtom, isConnectedAtom, selectedGameAtom } from '../store/store.ts'
-import GameSelectionPage from "./GameSelectionPage.tsx";
-import LobbyPage from "./LobbyPage.tsx";
+import { userAtom, isConnectedAtom } from '../store/store.ts'
 import BaseGameLayer from "./BaseGameLayer.tsx";
 
 
 function StartPage() {
     const name = useAtomValue(userAtom)
     const isConnected = useAtomValue(isConnectedAtom)
-    const selectedGame = useAtomValue(selectedGameAtom)
     const sc = socketConnection;
 
 

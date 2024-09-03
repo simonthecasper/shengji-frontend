@@ -2,6 +2,7 @@ import { sendData } from "../socket/socket.js";
 import { useState } from "react";
 import { useAtom } from "jotai";
 import { isConnectedAtom, userAtom } from "../store/store.ts";
+import Button from "../components/Button.tsx";
 
 //  TODO: Wrong alert response to no value entered in input
 function JoinSession() {
@@ -42,7 +43,7 @@ function JoinSession() {
           value={joinSessionID}
           onChange={changeJoinSessionID}
         />
-        <button onClick={joinSession}>Join Session</button> </div>
+        <Button bg="primary" onClick={joinSession}>Join Session</Button> </div>
     </>
   )
 

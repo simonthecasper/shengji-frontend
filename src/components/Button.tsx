@@ -1,13 +1,13 @@
 interface Props {
     children: string;
-    color?: "primary" | "secondary" | "danger";
+    bg?: "primary" | "secondary" | "danger";
     onClick: () => void;
 }
 
-//  TODO: Make a flexible component
-const Button = ({ children, color = "primary", onClick }: Props) => {
+//  TODO: set up flexible margin and padding 
+const Button = ({ children, bg, onClick }: Props) => {
     return (
-        <button className={"btn btn-" + color} onClick={onClick}>
+        <button className={"btn " + bg} onClick={onClick}>
             {children}
         </button>
     );

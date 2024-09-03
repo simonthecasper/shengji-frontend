@@ -1,5 +1,6 @@
 // import React from "react";
 
+import Button from "../components/Button.tsx";
 import { useSetAtom } from "jotai";
 import { nameAndConnectServer } from "../store/store.ts";
 import { useRef } from "react";
@@ -19,7 +20,7 @@ function UserLogin() {
     return (
         <div className="userLogin">
             <input name="username" className="baseInput" ref={input} />
-            <button onClick={handleClick}>Set Name</button>
+            <Button bg="primary" onClick={handleClick}>Set Name</Button>
         </div>
     )
 }
