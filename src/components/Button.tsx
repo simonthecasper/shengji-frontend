@@ -1,14 +1,21 @@
 interface Props {
     children: string;
     bg?: "primary" | "secondary" | "danger";
+    margin?: string;
+    padding?: string;
     onClick: () => void;
 }
 
-//  TODO: set up flexible margin and padding 
-const Button = ({ children, bg, onClick }: Props) => {
+const Button = (props: Props) => {
     return (
-        <button className={"btn " + bg} onClick={onClick}>
-            {children}
+        <button className={"btn " + props.bg} onClick={props.onClick}
+            style={
+                {
+                    margin: `${props.margin}`,
+                    padding: `${props.padding}`
+                }
+            }>
+            {props.children}
         </button>
     );
 };
