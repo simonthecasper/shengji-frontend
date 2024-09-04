@@ -103,7 +103,7 @@ button:active {
 }
 
 #joinSessionContainer {
-    animation: FadeIn 2s backwards;
+    animation: FadeIn 1s backwards;
 }
 
 #lobbyContainer {
@@ -139,6 +139,11 @@ button:active {
     grid-area: c;
     margin: 0 1rem 1rem 0;
     border: solid;
+}
+
+.userLogin>*:first-child {
+    text-align: center;
+    margin: 0 0 1rem 0;
 }
 
 .gameTileContainer {
