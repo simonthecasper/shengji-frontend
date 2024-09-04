@@ -20,7 +20,7 @@ function UserLogin() {
     return (
         <div className="userLogin">
             <input name="username" className="baseInput" ref={input} />
-            <Button bg="primary" onClick={handleClick}>Set Name</Button>
+            <Button margin="0 0 0 1rem" bg="primary" onClick={handleClick}>Set Name</Button>
         </div>
     )
 }

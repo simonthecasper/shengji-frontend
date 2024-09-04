@@ -29,7 +29,7 @@ function Connection() {
       <WelcomeUser />
       <div id="sessionOptions">
         <Button bg="primary" onClick={createSession}>Create Session</Button>
-        <Button bg="primary" onClick={() => { setJoinSession(true) }}>Join Session</Button>
+        <Button margin="0 0 0 1rem" bg="primary" onClick={() => { setJoinSession(true) }}>Join Session</Button>
         {}
       </div>
     </>

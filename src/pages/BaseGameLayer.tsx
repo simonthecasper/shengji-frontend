@@ -2,6 +2,7 @@ import { useAtomValue } from "jotai/react"
 import { isGameConfiguredAtom } from "../store/store"
 import { Fragment } from "react/jsx-runtime"
 import SelectGamePage from "./SelectGamePage"
+import Button from "../components/Button"
 
 const BaseGameLayer = () => {
   const isGameConfigured = useAtomValue(isGameConfiguredAtom);
@@ -12,15 +13,16 @@ const BaseGameLayer = () => {
     return output;
   }
 
+  //  TODO: make components for header and chatbox
   return (
     <div id="baseLayerContainer" className="fillContainer">
       <div id="navigationContainer">
-        <button>Placeholder txt</button>
+        <Button bg="danger" onClick={() => true}>Placeholder txt</Button>
         <div>
           <h1>Game Host Lobby</h1>
           <h2>Lobby ID</h2>
         </div>
-        <button>Placeholder txt</button>
+        <Button bg="secondary" onClick={() => true}>Placeholder txt</Button>
       </div>
       {layerContent()}
       <div id="chatBoxContainer">Chatbox</div>

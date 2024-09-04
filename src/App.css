@@ -40,11 +40,11 @@ input[name="username"]::placeholder {
     --_inactiveBg: var(--inactiveBg);
     --_hoverBg: var(--hoverBg);
     --_activeBg: var(--activeBg);
-    padding: 10px 20px;
+    padding: 1rem 1.25rem;
     border: none;
     cursor: pointer;
     outline: none;
-    border-radius: 25px;
+    border-radius: 1.25rem;
     background-color: var(--_inactiveBg);
     color: #ffffff;
 }
@@ -114,11 +114,11 @@ input[name="username"]::placeholder {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: FadeOut 2s 2s forwards;
+    animation: FadeOut 2s 1s forwards;
 }
 
 #sessionOptions {
-    animation: FadeIn 2s 2s backwards;
+    animation: FadeIn 2s 1s backwards;
 }
 
 #joinSessionContainer {
@@ -138,6 +138,7 @@ input[name="username"]::placeholder {
         "m m m c"
         "m m m c"
         "m m m c";
+    animation: FadeIn 1s backwards;
 }
 
 #navigationContainer {

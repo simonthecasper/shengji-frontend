@@ -43,7 +43,7 @@ function JoinSession() {
           value={joinSessionID}
           onChange={changeJoinSessionID}
         />
-        <Button bg="primary" onClick={joinSession}>Join Session</Button> </div>
+        <Button margin="0 0 0 1rem" bg="primary" onClick={joinSession}>Join Session</Button> </div>
     </>
   )
 
