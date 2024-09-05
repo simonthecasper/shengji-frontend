@@ -99,7 +99,21 @@ button:active {
 }
 
 #sessionOptions {
+    display: flex;
+    flex-direction: column;
     animation: FadeIn 2s 2s backwards;
+}
+
+#sessionOptions>*+* {
+    margin-top: 1.5rem;
+}
+
+#sessionOptions>div {
+    display: flex;
+}
+
+#sessionOptions>div span {
+    margin: 0 1rem;
 }
 
 #joinSessionContainer {
@@ -165,4 +179,8 @@ button:active {
 .fillContainer {
     width: 100%;
     height: 100%;
+}
+
+.maxWidth {
+    width: 100%;
 }

@@ -22,18 +22,21 @@ function Connection() {
     setIsConnected(true);
   };
 
-  const connectionType = joinSession ?
-    <JoinSession /> :
+  return (
     <>
       <WelcomeUser />
       <div id="sessionOptions">
         <button onClick={createSession}>Create Session</button>
-        <button onClick={() => { setJoinSession(true) }}>Join Session</button>
-        {}
+        <div>
+          <hr className="maxWidth" />
+          <span>OR</span>
+          <hr className="maxWidth" />
+        </div>
+        <JoinSession />
       </div>
     </>
+  )
 
-  return connectionType
 }
 
 export default Connection;
