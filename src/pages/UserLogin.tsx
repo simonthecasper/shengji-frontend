@@ -7,7 +7,6 @@ import { useRef } from "react";
 import '../App.css'
 
 function UserLogin() {
-    // const [input ] = useAtom(inputAtom)
     const setName = useSetAtom(nameAndConnectServer)
     const input = useRef<HTMLInputElement>(null)
 
@@ -19,6 +18,7 @@ function UserLogin() {
 
     return (
         <div className="userLogin">
+            <h1>Set your username!</h1>
             <input name="username" className="baseInput" ref={input} />
             <Button margin="0 0 0 1rem" bg="primary" onClick={handleClick}>Set Name</Button>
         </div>

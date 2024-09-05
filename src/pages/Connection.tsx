@@ -1,5 +1,4 @@
 import { sendData } from "../socket/socket";
-import { useState } from "react";
 import { useAtom, useSetAtom } from "jotai";
 import { isConnectedAtom, userAtom } from "../store/store.ts";
 import WelcomeUser from "../components/WelcomeUser.tsx";
@@ -12,8 +11,6 @@ function Connection() {
   const [user, _setUser] = useAtom(userAtom);
   const setIsConnected = useSetAtom(isConnectedAtom);
 
-  const [joinSession, setJoinSession] = useState(false)
-
   const createSession = () => {
     sendData("test_message", {
       stage: "prelobby",
@@ -23,18 +20,20 @@ function Connection() {
     setIsConnected(true);
   };
 
-  const connectionType = joinSession ?
-    <JoinSession /> :
+  return (
     <>
       <WelcomeUser />
       <div id="sessionOptions">
         <Button bg="primary" onClick={createSession}>Create Session</Button>
-        <Button margin="0 0 0 1rem" bg="primary" onClick={() => { setJoinSession(true) }}>Join Session</Button>
-        {}
+        <div>
+          <hr className="maxWidth" />
+          <span>OR</span>
+          <hr className="maxWidth" />
+        </div>
+        <JoinSession />
       </div>
     </>
-
-  return connectionType
+  )
 }
 
 export default Connection;
