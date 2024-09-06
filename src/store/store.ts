@@ -45,13 +45,13 @@ export const sessionIDAtom = atom("Unset");
 
 export const messageHandlerAtom = atom(
 	() => '',
-	(get, set, message: string) => {
+	(_get, set, message: string) => {
 		console.log("Message received from server. Printing in handleratom...");
 		console.log(message);
 
-		let messageObject = JSON.parse(message);
-		let stage = messageObject.stage;
-		let task = messageObject.task;
+		const messageObject = JSON.parse(message);
+		const stage = messageObject.stage;
+		const task = messageObject.task;
 		if (stage === "prelobby") {
 			if (task === "join_session_ack") {
 				set(sessionIDAtom, messageObject.session_id)
