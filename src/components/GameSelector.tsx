@@ -1,19 +1,17 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { selectedGameAtom, gamesAtom } from "../store/store";
 
-export default function GameSelectionPage() {
+const GameSelector = () => {
     const setSelectedGame = useSetAtom(selectedGameAtom);
     const games = useAtomValue(gamesAtom);
 
     function selectGame(game: string) {
         setSelectedGame(game);
     }
-
-    function gameOptions() {
-        return (
+    return (
+        <>
             <div>
-                <h1>Game Selection Page</h1>
-                <h2>Select a game to play</h2>
+                <h1>Select a Game</h1>
                 <div className="gameTileContainer">
                     {games.map((game) => {
                         return (
@@ -29,7 +27,8 @@ export default function GameSelectionPage() {
                     })}
                 </div>
             </div>
-        );
-    }
-    return gameOptions();
-}
+        </>
+    );
+};
+
+export default GameSelector;

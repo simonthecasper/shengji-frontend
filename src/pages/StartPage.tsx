@@ -1,32 +1,26 @@
-
 import { useEffect, Fragment } from "react";
 import { socketConnection } from "../socket/socket";
 import UserLogin from "./UserLogin.tsx";
 import Connection from "./Connection.tsx";
-import { useAtomValue } from 'jotai'
+import { useAtomValue, useSetAtom } from 'jotai'
 import { userAtom, isConnectedAtom } from '../store/store.ts'
 import BaseGameLayer from "./BaseGameLayer.tsx";
-
+import { messageHandlerAtom } from "../store/store.ts";
 
 function StartPage() {
     const name = useAtomValue(userAtom)
     const isConnected = useAtomValue(isConnectedAtom)
+    const messageHandler = useSetAtom(messageHandlerAtom);
     const sc = socketConnection;
-
 
     useEffect(() => {
         sc.on("server_message", (data) => {
-            console.log("Message received from server...");
-            console.log(data);
-
-            //update the contexts that represent the game state
+            messageHandler(data);
         });
-        // });
-    }, [socketConnection]);
-
+    }, [sc]);
 
     const routeUser = () => {
-        let toReturn = <Fragment />
+        let toReturn = <Fragment />;
         if (!name) {
             toReturn = <UserLogin />
         }
@@ -36,14 +30,10 @@ function StartPage() {
         else if (name && isConnected) {
             toReturn = <BaseGameLayer />
         }
-        return toReturn
-    }
+        return toReturn;
+    };
 
-    return (
-        <div className="StartPage">
-            {routeUser()}
-        </div>
-    );
+    return <div className="StartPage">{routeUser()}</div>;
 }
 
 export default StartPage;
