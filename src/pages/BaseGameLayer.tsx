@@ -1,10 +1,11 @@
 import { useAtomValue } from "jotai/react"
-import { isGameConfiguredAtom } from "../store/store"
+import { isGameConfiguredAtom, sessionIDAtom } from "../store/store"
 import { Fragment } from "react/jsx-runtime"
 import SelectGamePage from "./SelectGamePage"
 import Button from "../components/Button"
 
 const BaseGameLayer = () => {
+  const sessionId = useAtomValue(sessionIDAtom)
   const isGameConfigured = useAtomValue(isGameConfiguredAtom);
 
   const layerContent = () => {
@@ -20,7 +21,7 @@ const BaseGameLayer = () => {
         <Button bg="danger" onClick={() => true}>Placeholder txt</Button>
         <div>
           <h1>Game Host Lobby</h1>
-          <h2>Lobby ID</h2>
+          <h2>Lobby ID: {sessionId}</h2>
         </div>
         <Button bg="secondary" onClick={() => true}>Placeholder txt</Button>
       </div>
