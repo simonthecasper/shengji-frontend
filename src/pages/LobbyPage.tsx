@@ -1,16 +1,18 @@
-import { useAtomValue } from "jotai/react"
-import { selectedGameAtom } from "../store/store"
-import ListOfPlayers from "../components/ListOfPlayers"
+import { useAtomValue } from "jotai/react";
+import ListOfPlayers from "../components/ListOfPlayers";
+import GameSelector from "../components/GameSelector";
+import { sessionIDAtom } from "../store/store";
 
 const LobbyPage = () => {
-  const selectedGame = useAtomValue(selectedGameAtom)
+    let sessionID = useAtomValue(sessionIDAtom);
 
-  return (
-    <div id="lobbyContainer">
-      <h1>{selectedGame}</h1>
-      <ListOfPlayers />
-    </div>
-  )
-}
+    return (
+        <div id="lobbyContainer">
+            {<h1>{sessionID}</h1>}
+            <ListOfPlayers />
+            <GameSelector />
+        </div>
+    );
+};
 
-export default LobbyPage
+export default LobbyPage;
