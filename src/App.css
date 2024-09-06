@@ -9,6 +9,14 @@ body {
     margin: 0;
 }
 
+h1 {
+    margin: 0;
+}
+
+h2 {
+    margin: 0;
+}
+
 .baseInput {
     padding: 10px;
     margin: 10px 0;
@@ -28,24 +36,43 @@ input[name="username"]::placeholder {
     color: #657786;
 }
 
-button {
-    padding: 10px 20px;
+.btn {
+    --_inactiveBg: var(--inactiveBg);
+    --_hoverBg: var(--hoverBg);
+    --_activeBg: var(--activeBg);
+    padding: 1rem 1.25rem;
     border: none;
-    border-radius: 25px;
-    background-color: #1DA1F2;
-    color: #ffffff;
-    font-size: 14px;
     cursor: pointer;
     outline: none;
-    margin-left: 10px;
+    border-radius: 1.25rem;
+    background-color: var(--_inactiveBg);
+    color: #ffffff;
 }
 
-button:hover {
-    background-color: #1a8cd8;
+.btn:hover {
+    background-color: var(--_hoverBg);
 }
 
-button:active {
-    background-color: #0d95e8;
+.btn:active {
+    background-color: var(--_activeBg);
+}
+
+.primary {
+    --inactiveBg: #1DA1F2;
+    --hoverBg: #1a8cd8;
+    --activeBg: #0d95e8;
+}
+
+.secondary {
+    --inactiveBg: #30be45;
+    --hoverBg: #5faa6a;
+    --activeBg: #86f095;
+}
+
+.danger {
+    --inactiveBg: #f3185c;
+    --hoverBg: #ac4162;
+    --activeBg: #eb618c;
 }
 
 #root,
@@ -87,21 +114,70 @@ button:active {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: FadeOut 2s 2s forwards;
+    animation: FadeOut 2s 1s forwards;
 }
 
 #sessionOptions {
-    animation: FadeIn 2s 2s backwards;
+    display: flex;
+    flex-direction: column;
+    animation: FadeIn 2s 1s backwards;
+}
+
+#sessionOptions>*+* {
+    margin-top: 1.5rem;
+}
+
+#sessionOptions>div {
+    display: flex;
+}
+
+#sessionOptions>div span {
+    margin: 0 1rem;
 }
 
 #joinSessionContainer {
-    animation: FadeIn 2s backwards;
+    animation: FadeIn 1s backwards;
 }
 
 #lobbyContainer {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
+}
+
+#baseLayerContainer {
+    display: grid;
+    grid-template:
+        "h h h h" 20%
+        "m m m c"
+        "m m m c"
+        "m m m c";
+    animation: FadeIn 1s backwards;
+}
+
+#navigationContainer {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+    padding: 1rem;
+    border: white 1px solid;
+    grid-area: h;
+}
+
+#gamePageContainer {
+    grid-area: m;
+    margin: 0 1rem 1rem 1rem;
+}
+
+#chatBoxContainer {
+    grid-area: c;
+    margin: 0 1rem 1rem 0;
+    border: solid;
+}
+
+.userLogin>*:first-child {
+    text-align: center;
+    margin: 0 0 1rem 0;
 }
 
 .gameTileContainer {
@@ -117,4 +193,14 @@ button:active {
 .gameTile:hover {
     padding: 3rem;
     font-size: 1.5rem;
+}
+
+/* Utility Classes*/
+.fillContainer {
+    width: 100%;
+    height: 100%;
+}
+
+.maxWidth {
+    width: 100%;
 }

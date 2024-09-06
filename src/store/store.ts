@@ -59,3 +59,4 @@ export const messageHandlerAtom = atom(
 		}
 	}
 );
+export const isGameConfiguredAtom = atom(false);

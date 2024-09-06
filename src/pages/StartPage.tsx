@@ -2,14 +2,14 @@ import { useEffect, Fragment } from "react";
 import { socketConnection } from "../socket/socket";
 import UserLogin from "./UserLogin.tsx";
 import Connection from "./Connection.tsx";
-import { useAtomValue, useSetAtom } from "jotai";
-import { userAtom, isConnectedAtom } from "../store/store.ts";
-import LobbyPage from "./LobbyPage.tsx";
+import { useAtomValue, useSetAtom } from 'jotai'
+import { userAtom, isConnectedAtom } from '../store/store.ts'
+import BaseGameLayer from "./BaseGameLayer.tsx";
 import { messageHandlerAtom } from "../store/store.ts";
 
 function StartPage() {
-    const name = useAtomValue(userAtom);
-    const isConnected = useAtomValue(isConnectedAtom);
+    const name = useAtomValue(userAtom)
+    const isConnected = useAtomValue(isConnectedAtom)
     const messageHandler = useSetAtom(messageHandlerAtom);
     const sc = socketConnection;
 
@@ -22,11 +22,13 @@ function StartPage() {
     const routeUser = () => {
         let toReturn = <Fragment />;
         if (!name) {
-            toReturn = <UserLogin />;
-        } else if (name && !isConnected) {
-            toReturn = <Connection />;
-        } else if (name && isConnected) {
-            toReturn = <LobbyPage />;
+            toReturn = <UserLogin />
+        }
+        else if (name && !isConnected) {
+            toReturn = <Connection />
+        }
+        else if (name && isConnected) {
+            toReturn = <BaseGameLayer />
         }
         return toReturn;
     };
