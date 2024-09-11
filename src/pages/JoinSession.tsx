@@ -1,52 +1,43 @@
-import { sendData } from "../socket/socket.js";
 import { useState } from "react";
 import { useAtom } from "jotai";
-import { isConnectedAtom, userAtom } from "../store/store.ts";
+import { userAtom } from "../store/store.ts";
 import Button from "../components/Button.tsx";
+
+import { C2S_joinSession } from "../socket/C2SMessages.ts";
 
 //  TODO: Wrong alert response to no value entered in input
 function JoinSession() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [user, _setUser] = useAtom(userAtom);
+    const [joinSessionID, updateJoinSessionID] = useState("");
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [user, _setUser] = useAtom(userAtom);
-  const [isConnected, setIsConnected] = useAtom(isConnectedAtom);
+    const changeJoinSessionID = (event: { target: { value: string } }) => {
+        updateJoinSessionID(event.target.value);
+    };
 
-  const [joinSessionID, updateJoinSessionID] = useState("");
+    const joinSession = () => {
+        if (joinSessionID.length != 6) {
+            alert("The provided ID is not the correct length.");
+        } else {
+            C2S_joinSession(user, joinSessionID);
+        }
+    };
 
-  const changeJoinSessionID = (event: { target: { value: string } }) => {
-    updateJoinSessionID(event.target.value);
-  };
-  const joinSession = () => {
-    if (!isConnected) {
-      alert("Please enter and set a username first");
-    } else if (joinSessionID.length != 4) {
-      alert("The provided ID is not the correct length.");
-    } else {
-      const message_dict = {
-        stage: "prelobby",
-        task: "join_session",
-        session_id: joinSessionID,
-        username: user,
-      };
-      setIsConnected(true);
-
-      sendData("test_message", message_dict);
-    }
-  };
-
-  return (
-    <>
-      <div id="joinSessionContainer">
-        <input
-          name="joinSessionID_input"
-          className="baseInput"
-          value={joinSessionID}
-          onChange={changeJoinSessionID}
-        />
-        <Button margin="0 0 0 1rem" bg="primary" onClick={joinSession}>Join Session</Button> </div>
-    </>
-  )
-
+    return (
+        <>
+            <div id="joinSessionContainer">
+                <input
+                    name="joinSessionID_input"
+                    className="baseInput"
+                    value={joinSessionID}
+                    onChange={changeJoinSessionID}
+                />
+                <Button margin="0 0 0 1rem" bg="primary" onClick={joinSession}>
+                    Join Session
+                </Button>{" "}
+            </div>
+        </>
+    );
 }
 
 export default JoinSession;
