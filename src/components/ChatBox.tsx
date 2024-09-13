@@ -1,16 +1,35 @@
 import { useEffect, useRef, useState } from 'react';
 import { socketConnection } from "../socket/socket";
+import { userPlayerIDAtom } from '../store/store';
 import Messages from '../interfaces/Message';
+import Button from './Button';
+import { useAtomValue } from 'jotai';
 
 const ChatBox = () => {
     const messageContainerRef = useRef(null);
     const sc = socketConnection;
     const [messages, setMessages] = useState<Messages[]>(new Array<Messages>())
+    const input = useRef<HTMLInputElement>(null)
+    const userPlayerID = useAtomValue(userPlayerIDAtom)
+
+    const sendNewMessage = () => {
+        if (input.current) {
+            const sender: Messages = {
+                player_id: userPlayerID,
+                message: input.current.value
+            }
+            sc.send(sender)
+            input.current.value = ""
+        }
+    }
 
     useEffect(() => {
         // Listen for new messages from the WebSocket
         sc.on('chat_message', (message) => {
             console.log(message)
+
+            setMessages([...messages, { player_id: message.player_id, message: message.message }])
+
             // Create a new message element
             // const messageElement = document.createElement('div');
             // messageElement.textContent = message;
@@ -24,7 +43,7 @@ const ChatBox = () => {
     }, [sc]);
     const contents = () => {
         return messages.map((msg: Messages) => {
-            <div>
+            return (<div>
                 <div>
                     {msg.player_id}
                 </div>
@@ -32,7 +51,7 @@ const ChatBox = () => {
                     {msg.message}
                 </div>
 
-            </div>
+            </div>)
         })
     }
 
@@ -42,7 +61,8 @@ const ChatBox = () => {
                 style={{ height: '300px', overflowY: 'scroll', border: '1px solid black' }}>
                 {contents()}
             </div>
-            <input type="" />
+            <input ref={input} type="" />
+            <Button bg="primary" onClick={sendNewMessage}>Send Message</Button>
         </>
     );
 };
