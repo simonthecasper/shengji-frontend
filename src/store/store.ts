@@ -45,17 +45,6 @@ export const sessionIDAtom = atom("Unset");
 
 export const isGameConfiguredAtom = atom(false);
 
+export const playerAttributesAtom = atom(null);
 
-interface NestedObj {
-	[key: string]: string
-}
-interface LooseObject {
-	[key: string]: NestedObj
-}
-
-export const playerAttributesAtom = atom(
-	null,
-	(_get, set, parameters: LooseObject) => {
-		set(playerAttributesAtom, parameters);
-	}
-);
+export const hostPlayerIDAtom = atom(null);
