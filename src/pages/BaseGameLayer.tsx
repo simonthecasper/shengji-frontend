@@ -2,6 +2,7 @@ import { useAtomValue } from "jotai/react"
 import { isGameConfiguredAtom, sessionIDAtom } from "../store/store"
 import { Fragment } from "react/jsx-runtime"
 import SelectGamePage from "./SelectGamePage"
+import ChatBox from "../components/ChatBox"
 import Button from "../components/Button"
 
 const BaseGameLayer = () => {
@@ -26,7 +27,9 @@ const BaseGameLayer = () => {
         <Button bg="secondary" onClick={() => true}>Placeholder txt</Button>
       </div>
       {layerContent()}
-      <div id="chatBoxContainer">Chatbox</div>
+      <div id="chatBoxContainer">
+        <ChatBox />
+      </div>
     </div>
   )
 }
