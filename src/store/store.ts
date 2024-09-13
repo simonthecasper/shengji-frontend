@@ -45,16 +45,6 @@ export const sessionIDAtom = atom("Unset");
 
 export const isGameConfiguredAtom = atom(false);
 
+export const playerAttributesAtom = atom(null);
 
-
-interface LooseObject {
-	[key: string]: string
-}
-var playerAttributes: LooseObject = {};
-export const playerAttributesAtom = atom(
-	playerAttributes,
-	(get, set, parameters:LooseObject) => {
-		//TODO: figure out how to implement large object as an atom
-	}
-
-);
+export const hostPlayerIDAtom = atom(null);
