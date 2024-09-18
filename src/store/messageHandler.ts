@@ -18,7 +18,7 @@ export const messageHandlerAtom = atom(
 
 		if (stage === "prelobby") {
 			if (task === "join_session_ack") {
-				if (get(sessionIDAtom) == "Unset") {
+				if (get(sessionIDAtom) === null) {
 					const player_id = messageObject.player_id
 
 					set(userPlayerIDAtom, player_id)

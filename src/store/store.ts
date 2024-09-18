@@ -1,4 +1,4 @@
-import { initSocketConnection } from "../socket/socket";
+import { disconnect, initSocketConnection } from "../socket/socket";
 import { atom } from 'jotai/vanilla'
 import { GameTypes } from "../enums/GameTypes.ts";
 
@@ -27,6 +27,7 @@ export const nameAndConnectServer = atom(
 	}
 );
 
+//login, connect_session, lobby
 export const pageStateAtom = atom("login");
 
 export const isInLobbyAtom = atom(false);
@@ -34,7 +35,7 @@ export const isInLobbyAtom = atom(false);
 export const gamesAtom = atom([GameTypes.shengji]);
 
 // Atom to hold the selected game, initially null
-export const selectedGameAtom = atom(null, // initial value
+export const selectedGameAtom = atom("", // initial value
 	(get, set, selectedGame: string) => {
 		const games = get(gamesAtom);
 		console.log('selectedGame: ', selectedGame);
@@ -46,10 +47,34 @@ export const selectedGameAtom = atom(null, // initial value
 
 export const listOfPlayersAtom = atom([" "]);
 
-export const sessionIDAtom = atom("Unset");
+export const sessionIDAtom = atom(null);
 
 export const isGameConfiguredAtom = atom(false);
 
 export const playerAttributesAtom = atom(null);
 
-export const hostPlayerIDAtom = atom("");
+export const hostPlayerIDAtom = atom(null);
+
+// Resets relevant atom values and fully disconnects user from server
+export const disconnectAtom = atom(
+	() => '',
+	(get, set) => {
+		set(pageStateAtom, "login")
+		set(userPlayerIDAtom, "")
+		set(isInLobbyAtom, false)
+		set(sessionIDAtom, null)
+		set(isGameConfiguredAtom, false)
+		set(playerAttributesAtom, null)
+		set(hostPlayerIDAtom, null)
+		disconnect()
+	}
+);
+
+
+
+//Back and Next Buttons
+export const backButtonTextAtom = atom("Placeholder");
+export const backButtonActiveAtom = atom(true);
+
+export const nextButtonTextAtom = atom("Placeholder");
+export const nextButtonActiveAtom = atom(true);
