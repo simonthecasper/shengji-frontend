@@ -17,12 +17,17 @@ export const nameAndConnectServer = atom(
 			return;
 		} else {
 			set(userAtom, input)
+			if (get(pageStateAtom) === "login") {
+				set(pageStateAtom, "connect_session")
+			}
 		}
 		console.log('username: ', get(userAtom));
 
 		initSocketConnection();
 	}
 );
+
+export const pageStateAtom = atom("login");
 
 export const isInLobbyAtom = atom(false);
 
@@ -39,7 +44,7 @@ export const selectedGameAtom = atom(null, // initial value
 	}
 );
 
-export const listOfPlayersAtom = atom(['p1', 'p2', 'p3'])
+export const listOfPlayersAtom = atom([" "]);
 
 export const sessionIDAtom = atom("Unset");
 
@@ -47,4 +52,4 @@ export const isGameConfiguredAtom = atom(false);
 
 export const playerAttributesAtom = atom(null);
 
-export const hostPlayerIDAtom = atom(null);
+export const hostPlayerIDAtom = atom("");

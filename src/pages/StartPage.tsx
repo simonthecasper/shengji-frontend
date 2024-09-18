@@ -5,12 +5,11 @@ import Connection from "./Connection.tsx";
 import BaseGameLayer from "./BaseGameLayer.tsx";
 
 import { useAtomValue, useSetAtom } from "jotai";
-import { userAtom, isInLobbyAtom } from "../store/store.ts";
+import { pageStateAtom } from "../store/store.ts";
 import { messageHandlerAtom } from "../store/messageHandler.ts";
 
 function StartPage() {
-    const name = useAtomValue(userAtom);
-    const isInLobby = useAtomValue(isInLobbyAtom);
+    const pageState = useAtomValue(pageStateAtom);
     const messageHandler = useSetAtom(messageHandlerAtom);
     const sc = socketConnection;
 
@@ -22,11 +21,11 @@ function StartPage() {
 
     const routeUser = () => {
         let toReturn = <Fragment />;
-        if (!name) {
+        if (pageState === "login") {
             toReturn = <UserLogin />;
-        } else if (name && !isInLobby) {
+        } else if (pageState === "connect_session") {
             toReturn = <Connection />;
-        } else if (name && isInLobby) {
+        } else if (pageState === "lobby") {
             toReturn = <BaseGameLayer />;
         }
         return toReturn;
