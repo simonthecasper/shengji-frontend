@@ -2,22 +2,20 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai/react";
 import {
     backButtonTextAtom,
     hostPlayerIDAtom,
-    isGameConfiguredAtom,
     playerAttributesAtom,
     sessionIDAtom,
     nextButtonTextAtom,
-    pageStateAtom,
-    disconnectAtom,
+    backButtonClickAtom,
+    nextButtonClickAtom,
 } from "../store/store";
+import { pageStateAtom } from "../store/pageStateAtom";
 import { Fragment } from "react/jsx-runtime";
 import Button from "../components/Button";
 import LobbyPage from "./LobbyPage";
-import { disconnect } from "../socket/socket";
 
 const BaseGameLayer = () => {
-    const [pageState, setPageState] = useAtom(pageStateAtom);
+    const [pageState] = useAtom(pageStateAtom);
     const sessionId = useAtomValue(sessionIDAtom);
-    const isGameConfigured = useAtomValue(isGameConfiguredAtom);
 
     const playerAttributes = useAtomValue(playerAttributesAtom);
     const hostPlayerID = useAtomValue(hostPlayerIDAtom);
@@ -27,25 +25,28 @@ const BaseGameLayer = () => {
     const backButtonText = useAtomValue(backButtonTextAtom);
     const nextButtonText = useAtomValue(nextButtonTextAtom);
 
-    const disconnect = useSetAtom(disconnectAtom);
+    const backButtonClick = useSetAtom(backButtonClickAtom);
+    const nextButtonClick = useSetAtom(nextButtonClickAtom);
 
     const layerContent = () => {
         let output = <Fragment />;
-        if (!isGameConfigured) output = <LobbyPage />;
+        if (pageState === "lobby") output = <LobbyPage />;
         return output;
     };
 
-    const backButtonClick = () => {
-        if (pageState === "lobby") {
-            disconnect();
-        }
+    const backButtonOnClick = () => {
+        backButtonClick();
+    };
+
+    const nextButtonOnClick = () => {
+        nextButtonClick();
     };
 
     //  TODO: make components for header and chatbox
     return (
         <div id="baseLayerContainer" className="fillContainer">
             <div id="navigationContainer">
-                <Button bg="danger" onClick={backButtonClick}>
+                <Button bg="danger" onClick={backButtonOnClick}>
                     {backButtonText}
                 </Button>
                 <div>
@@ -55,7 +56,7 @@ const BaseGameLayer = () => {
                     </h1>
                     <h2>Lobby ID: {sessionId}</h2>
                 </div>
-                <Button bg="secondary" onClick={() => true}>
+                <Button bg="secondary" onClick={nextButtonOnClick}>
                     {nextButtonText}
                 </Button>
             </div>

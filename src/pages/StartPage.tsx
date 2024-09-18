@@ -5,7 +5,7 @@ import Connection from "./Connection.tsx";
 import BaseGameLayer from "./BaseGameLayer.tsx";
 
 import { useAtomValue, useSetAtom } from "jotai";
-import { pageStateAtom } from "../store/store.ts";
+import { pageStateAtom } from "../store/pageStateAtom.ts";
 import { messageHandlerAtom } from "../store/messageHandler.ts";
 
 function StartPage() {

@@ -6,7 +6,7 @@ import { userPlayerIDAtom } from "./store";
 import { playerAttributesAtom } from "./store";
 import { hostPlayerIDAtom } from "./store";
 import { listOfPlayersAtom } from "./store";
-import { pageStateAtom } from "./store";
+import { pageStateAtom } from "./pageStateAtom";
 
 export const messageHandlerAtom = atom(
 	() => '',
@@ -41,7 +41,6 @@ export const messageHandlerAtom = atom(
 				
 				let usernames: string[] = []
 				Object.keys(player_attributes).forEach(function(key, value) {
-					// usernames.push(player_attributes[key].username)
 					usernames.push(key)
 				});
 				

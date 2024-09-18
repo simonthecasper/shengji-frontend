@@ -1,8 +1,9 @@
 import { disconnect, initSocketConnection } from "../socket/socket";
 import { atom } from 'jotai/vanilla'
 import { GameTypes } from "../enums/GameTypes.ts";
+import { pageStateAtom } from "./pageStateAtom.ts";
 
-export const userAtom = atom<string>(''); //{username: ""}
+export const userAtom = atom<string>('');
 export const userPlayerIDAtom = atom<string>('');
 
 export const nameAndConnectServer = atom(
@@ -27,8 +28,7 @@ export const nameAndConnectServer = atom(
 	}
 );
 
-//login, connect_session, lobby
-export const pageStateAtom = atom("login");
+
 
 export const isInLobbyAtom = atom(false);
 
@@ -75,6 +75,20 @@ export const disconnectAtom = atom(
 //Back and Next Buttons
 export const backButtonTextAtom = atom("Placeholder");
 export const backButtonActiveAtom = atom(true);
+export const backButtonClickAtom = atom (
+	() => '',
+	(get, set) => {
+		if (get(pageStateAtom) === "lobby") {
+			set(disconnectAtom)
+		}
+	}
+);
 
 export const nextButtonTextAtom = atom("Placeholder");
 export const nextButtonActiveAtom = atom(true);
+export const nextButtonClickAtom = atom (
+	() => '',
+	(get, set) => {
+		
+	}
+);
