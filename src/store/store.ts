@@ -39,7 +39,7 @@ export const selectedGameAtom = atom("", // initial value
 	(get, set, selectedGame: string) => {
 		const games = get(gamesAtom);
 		console.log('selectedGame: ', selectedGame);
-		if (games.map(x => x.valueOf()).includes(selectedGame)) {
+		if (games.map(x => x.valueOf()).includes(selectedGame) || selectedGame === "") {
 			set(selectedGameAtom, selectedGame);
 		}
 	}
@@ -66,6 +66,7 @@ export const disconnectAtom = atom(
 		set(isGameConfiguredAtom, false)
 		set(playerAttributesAtom, null)
 		set(hostPlayerIDAtom, null)
+		set(selectedGameAtom, "")
 		disconnect()
 	}
 );
