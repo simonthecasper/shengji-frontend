@@ -12,6 +12,7 @@ import { pageStateAtom } from "../store/pageStateAtom";
 import { Fragment } from "react/jsx-runtime";
 import Button from "../components/Button";
 import LobbyPage from "./LobbyPage";
+import { attributesAndHostSignalAtom } from "../store/store";
 
 const BaseGameLayer = () => {
     const [pageState] = useAtom(pageStateAtom);
@@ -19,8 +20,11 @@ const BaseGameLayer = () => {
 
     const playerAttributes = useAtomValue(playerAttributesAtom);
     const hostPlayerID = useAtomValue(hostPlayerIDAtom);
-    const hostPlayerUsername =
-        hostPlayerID === null ? "" : playerAttributes[hostPlayerID].username;
+    const attributesAndHostSignal = useAtomValue(attributesAndHostSignalAtom);
+
+    const hostPlayerUsername = attributesAndHostSignal
+        ? playerAttributes[hostPlayerID].username
+        : "";
 
     const backButtonText = useAtomValue(backButtonTextAtom);
     const nextButtonText = useAtomValue(nextButtonTextAtom);

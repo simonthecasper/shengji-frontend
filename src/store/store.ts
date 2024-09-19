@@ -28,10 +28,38 @@ export const nameAndConnectServer = atom(
 	}
 );
 
+export const listOfPlayersAtom = atom([" "]);
 
+export const isGameConfiguredAtom = atom(false);
+
+// BaseGameLayer display atoms
+export const sessionIDAtom = atom(null);
+export const playerAttributesAtom = atom(null,
+	(get, set, input:Object) => {
+		set(playerAttributesAtom, input)
+
+		if (get(playerAttributesAtom) != null && get(hostPlayerIDAtom) != null)
+			set(attributesAndHostSignalAtom, true)
+		else 
+			set(attributesAndHostSignalAtom, false)
+	}
+);
+export const hostPlayerIDAtom = atom(null,
+	(get, set, input:string) => {
+		set(hostPlayerIDAtom, input)
+
+		if (get(playerAttributesAtom) != null && get(hostPlayerIDAtom) != null)
+			set(attributesAndHostSignalAtom, true)
+		else 
+			set(attributesAndHostSignalAtom, false)
+	}
+);
+export const hostPlayerUsernameAtom = atom("");
+export const attributesAndHostSignalAtom = atom(false);
+
+
+// Game Selection atoms
 export const gamesAtom = atom([GameTypes.shengji]);
-
-// Atom to hold the selected game, initially null
 export const selectedGameAtom = atom("", // initial value
 	(get, set, selectedGame: string) => {
 		const games = get(gamesAtom);
@@ -42,15 +70,7 @@ export const selectedGameAtom = atom("", // initial value
 	}
 );
 
-export const listOfPlayersAtom = atom([" "]);
 
-export const sessionIDAtom = atom(null);
-
-export const isGameConfiguredAtom = atom(false);
-
-export const playerAttributesAtom = atom(null);
-
-export const hostPlayerIDAtom = atom(null);
 
 // Resets relevant atom values and fully disconnects user from server
 export const disconnectAtom = atom(

@@ -1,4 +1,5 @@
 import {
+    attributesAndHostSignalAtom,
     hostPlayerIDAtom,
     listOfPlayersAtom,
     playerAttributesAtom,
@@ -10,6 +11,8 @@ const ListOfPlayers = () => {
     const playerAttributes = useAtomValue(playerAttributesAtom);
     const hostPlayerID = useAtomValue(hostPlayerIDAtom);
 
+    const attributesAndHostSignal = useAtomValue(attributesAndHostSignalAtom);
+
     //TODO: implement styling
     return (
         <div>
@@ -17,12 +20,12 @@ const ListOfPlayers = () => {
                 {listOfPlayers.map((player) => {
                     return (
                         <li key={player}>
-                            {playerAttributes === null
-                                ? ""
-                                : playerAttributes[player]["username"] +
+                            {attributesAndHostSignal
+                                ? playerAttributes[player]["username"] +
                                   (hostPlayerID === player
                                       ? " (lobby host)"
-                                      : "")}
+                                      : "")
+                                : ""}
                         </li>
                     );
                 })}
