@@ -1,8 +1,9 @@
-import { initSocketConnection } from "../socket/socket";
+import { disconnect, initSocketConnection } from "../socket/socket";
 import { atom } from 'jotai/vanilla'
 import { GameTypes } from "../enums/GameTypes.ts";
+import { pageStateAtom } from "./pageStateAtom.ts";
 
-export const userAtom = atom<string>(''); //{username: ""}
+export const userAtom = atom<string>('');
 export const userPlayerIDAtom = atom<string>('');
 
 export const nameAndConnectServer = atom(
@@ -17,6 +18,9 @@ export const nameAndConnectServer = atom(
 			return;
 		} else {
 			set(userAtom, input)
+			if (get(pageStateAtom) === "login") {
+				set(pageStateAtom, "connect_session")
+			}
 		}
 		console.log('username: ', get(userAtom));
 
@@ -24,27 +28,63 @@ export const nameAndConnectServer = atom(
 	}
 );
 
-export const isInLobbyAtom = atom(false);
 
 export const gamesAtom = atom([GameTypes.shengji]);
 
 // Atom to hold the selected game, initially null
-export const selectedGameAtom = atom(null, // initial value
+export const selectedGameAtom = atom("", // initial value
 	(get, set, selectedGame: string) => {
 		const games = get(gamesAtom);
 		console.log('selectedGame: ', selectedGame);
-		if (games.map(x => x.valueOf()).includes(selectedGame)) {
+		if (games.map(x => x.valueOf()).includes(selectedGame) || selectedGame === "") {
 			set(selectedGameAtom, selectedGame);
 		}
 	}
 );
 
-export const listOfPlayersAtom = atom(['p1', 'p2', 'p3'])
+export const listOfPlayersAtom = atom([" "]);
 
-export const sessionIDAtom = atom("Unset");
+export const sessionIDAtom = atom(null);
 
 export const isGameConfiguredAtom = atom(false);
 
 export const playerAttributesAtom = atom(null);
 
 export const hostPlayerIDAtom = atom(null);
+
+// Resets relevant atom values and fully disconnects user from server
+export const disconnectAtom = atom(
+	() => '',
+	(get, set) => {
+		set(pageStateAtom, "login")
+		set(userPlayerIDAtom, "")
+		set(sessionIDAtom, null)
+		set(isGameConfiguredAtom, false)
+		set(playerAttributesAtom, null)
+		set(hostPlayerIDAtom, null)
+		set(selectedGameAtom, "")
+		disconnect()
+	}
+);
+
+
+//Back and Next Buttons
+export const backButtonTextAtom = atom("Placeholder");
+export const backButtonActiveAtom = atom(true);
+export const backButtonClickAtom = atom (
+	() => '',
+	(get, set) => {
+		if (get(pageStateAtom) === "lobby") {
+			set(disconnectAtom)
+		}
+	}
+);
+
+export const nextButtonTextAtom = atom("Placeholder");
+export const nextButtonActiveAtom = atom(true);
+export const nextButtonClickAtom = atom (
+	() => '',
+	(get, set) => {
+		
+	}
+);

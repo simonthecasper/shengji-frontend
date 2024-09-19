@@ -1,20 +1,34 @@
-import { listOfPlayersAtom } from "../store/store"
-import { useAtomValue } from "jotai"
+import {
+    hostPlayerIDAtom,
+    listOfPlayersAtom,
+    playerAttributesAtom,
+} from "../store/store";
+import { useAtomValue } from "jotai";
 
 const ListOfPlayers = () => {
-    const listOfPlayers = useAtomValue(listOfPlayersAtom)
+    const listOfPlayers = useAtomValue(listOfPlayersAtom);
+    const playerAttributes = useAtomValue(playerAttributesAtom);
+    const hostPlayerID = useAtomValue(hostPlayerIDAtom);
 
+    //TODO: implement styling
     return (
         <div>
             <ul>
-                {listOfPlayers.map(player => {
+                {listOfPlayers.map((player) => {
                     return (
-                        <li key={player}>{player}</li>
-                    )
+                        <li key={player}>
+                            {playerAttributes === null
+                                ? ""
+                                : playerAttributes[player]["username"] +
+                                  (hostPlayerID === player
+                                      ? " (lobby host)"
+                                      : "")}
+                        </li>
+                    );
                 })}
             </ul>
         </div>
-    )
-}
+    );
+};
 
-export default ListOfPlayers
+export default ListOfPlayers;

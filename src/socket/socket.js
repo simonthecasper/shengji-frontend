@@ -20,4 +20,8 @@ export function isConnected() {
     return socketConnection.connected;
 }
 
+export function disconnect() {
+    socketConnection.disconnect()
+}
+
 export { socketConnection };

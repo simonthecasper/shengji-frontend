@@ -1,34 +1,69 @@
-import { useAtomValue } from "jotai/react"
-import { isGameConfiguredAtom, sessionIDAtom } from "../store/store"
-import { Fragment } from "react/jsx-runtime"
-import SelectGamePage from "./SelectGamePage"
-import Button from "../components/Button"
+import { useAtom, useAtomValue, useSetAtom } from "jotai/react";
+import {
+    backButtonTextAtom,
+    hostPlayerIDAtom,
+    playerAttributesAtom,
+    sessionIDAtom,
+    nextButtonTextAtom,
+    backButtonClickAtom,
+    nextButtonClickAtom,
+} from "../store/store";
+import { pageStateAtom } from "../store/pageStateAtom";
+import { Fragment } from "react/jsx-runtime";
+import Button from "../components/Button";
+import LobbyPage from "./LobbyPage";
 
 const BaseGameLayer = () => {
-  const sessionId = useAtomValue(sessionIDAtom)
-  const isGameConfigured = useAtomValue(isGameConfiguredAtom);
+    const [pageState] = useAtom(pageStateAtom);
+    const sessionId = useAtomValue(sessionIDAtom);
 
-  const layerContent = () => {
-    let output = <Fragment />
-    if (!isGameConfigured) output = <SelectGamePage />
-    return output;
-  }
+    const playerAttributes = useAtomValue(playerAttributesAtom);
+    const hostPlayerID = useAtomValue(hostPlayerIDAtom);
+    const hostPlayerUsername =
+        hostPlayerID === null ? "" : playerAttributes[hostPlayerID].username;
 
-  //  TODO: make components for header and chatbox
-  return (
-    <div id="baseLayerContainer" className="fillContainer">
-      <div id="navigationContainer">
-        <Button bg="danger" onClick={() => true}>Placeholder txt</Button>
-        <div>
-          <h1>Game Host Lobby</h1>
-          <h2>Lobby ID: {sessionId}</h2>
+    const backButtonText = useAtomValue(backButtonTextAtom);
+    const nextButtonText = useAtomValue(nextButtonTextAtom);
+
+    const backButtonClick = useSetAtom(backButtonClickAtom);
+    const nextButtonClick = useSetAtom(nextButtonClickAtom);
+
+    const layerContent = () => {
+        let output = <Fragment />;
+        if (pageState === "lobby") output = <LobbyPage />;
+        return output;
+    };
+
+    const backButtonOnClick = () => {
+        backButtonClick();
+    };
+
+    const nextButtonOnClick = () => {
+        nextButtonClick();
+    };
+
+    //  TODO: make components for header and chatbox
+    return (
+        <div id="baseLayerContainer" className="fillContainer">
+            <div id="navigationContainer">
+                <Button bg="danger" onClick={backButtonOnClick}>
+                    {backButtonText}
+                </Button>
+                <div>
+                    <h1>
+                        {hostPlayerUsername.concat("'s ")}
+                        Lobby
+                    </h1>
+                    <h2>Lobby ID: {sessionId}</h2>
+                </div>
+                <Button bg="secondary" onClick={nextButtonOnClick}>
+                    {nextButtonText}
+                </Button>
+            </div>
+            {layerContent()}
+            <div id="chatBoxContainer">Chatbox</div>
         </div>
-        <Button bg="secondary" onClick={() => true}>Placeholder txt</Button>
-      </div>
-      {layerContent()}
-      <div id="chatBoxContainer">Chatbox</div>
-    </div>
-  )
-}
+    );
+};
 
 export default BaseGameLayer;
