@@ -79,6 +79,7 @@ input[name="username"]::placeholder {
     --inactiveBg: #7e7e7e;
     --hoverBg: #7e7e7e;
     --activeBg: #7e7e7e;
+    cursor: default;
 }
 
 .primary_selected {
