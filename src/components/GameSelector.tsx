@@ -5,6 +5,7 @@ import {
     hostPlayerIDAtom,
     userPlayerIDAtom,
 } from "../store/store";
+import Button from "./Button";
 
 const GameSelector = () => {
     const selectedGame = useAtomValue(selectedGameAtom);
@@ -13,6 +14,8 @@ const GameSelector = () => {
 
     const userPlayerID = useAtomValue(userPlayerIDAtom);
     const hostPlayerID = useAtomValue(hostPlayerIDAtom);
+
+    const isHost = userPlayerID === hostPlayerID;
 
     function selectGame(game: string) {
         setSelectedGame(game);
@@ -26,7 +29,24 @@ const GameSelector = () => {
                 {games.map((game) => {
                     return (
                         <div key={game}>
-                            <button
+                            <Button
+                                bg={
+                                    !isHost
+                                        ? "inactive"
+                                        : game === selectedGame
+                                        ? "primary_selected"
+                                        : "primary"
+                                }
+                                onClick={() => selectGame(game)}
+                                disabled={
+                                    game === selectedGame ||
+                                    userPlayerID != hostPlayerID
+                                }
+                            >
+                                {game}
+                            </Button>
+
+                            {/* <button
                                 className="gameTile"
                                 onClick={() => selectGame(game)}
                                 disabled={
@@ -35,7 +55,7 @@ const GameSelector = () => {
                                 }
                             >
                                 {game}
-                            </button>
+                            </button> */}
                         </div>
                     );
                 })}
