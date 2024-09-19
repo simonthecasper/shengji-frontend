@@ -26,6 +26,11 @@
   (REQUIRED) To provide an event handler onClick to the button, use the "onClick" attribute, pass your 
   handler function to the prop. e.g.
   <Button onClick={handler}> text goes here </Button>
+
+  (OPTIONAL) To control whether the button will be disabled or enabled, use the "disable" attribute. Providing
+  "true" will make the button disabled while "false" will make the button usable.
+  Pass your control value to the prop. e.g.
+  <Button disable={true}> text goes here </Button>
   */
 interface Props {
     children: string;
@@ -33,17 +38,20 @@ interface Props {
     margin?: string;
     padding?: string;
     onClick: () => void;
+    disabled?: boolean;
 }
 
 const Button = (props: Props) => {
     return (
-        <button className={"btn " + props.bg} onClick={props.onClick}
-            style={
-                {
-                    margin: `${props.margin}`,
-                    padding: `${props.padding}`
-                }
-            }>
+        <button
+            className={"btn " + props.bg}
+            onClick={props.onClick}
+            disabled={props.disabled}
+            style={{
+                margin: `${props.margin}`,
+                padding: `${props.padding}`,
+            }}
+        >
             {props.children}
         </button>
     );
