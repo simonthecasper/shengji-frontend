@@ -192,7 +192,10 @@ input[name="username"]::placeholder {
     --inactiveBg: #7e7e7e;
     --hoverBg: #7e7e7e;
     --activeBg: #7e7e7e;
+<<<<<<< HEAD
     cursor: default;
+=======
+>>>>>>> 550efcf (added new style presets to Button and implemented visual switching of the styles in the game selector depending on who the host is and what is selected)
 }
 
 .primary_selected {
