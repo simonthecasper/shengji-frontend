@@ -54,8 +54,7 @@ export const hostPlayerIDAtom = atom(null,
 			set(attributesAndHostSignalAtom, false)
 	}
 );
-export const hostPlayerUsernameAtom = atom("");
-export const attributesAndHostSignalAtom = atom(false);
+export const attributesAndHostSignalAtom = atom(false); //Set to true once hostPlayerID and playerAttributes are both received
 
 
 // Game Selection atoms
