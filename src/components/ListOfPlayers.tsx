@@ -19,11 +19,10 @@ const ListOfPlayers = () => {
                         <li key={player}>
                             {playerAttributes === null
                                 ? ""
-                                : playerAttributes[player]["username"].concat(
-                                      hostPlayerID === player
-                                          ? " (lobby host)"
-                                          : ""
-                                  )}
+                                : playerAttributes[player]["username"] +
+                                  (hostPlayerID === player
+                                      ? " (lobby host)"
+                                      : "")}
                         </li>
                     );
                 })}

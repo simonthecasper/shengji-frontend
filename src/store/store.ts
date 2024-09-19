@@ -29,9 +29,6 @@ export const nameAndConnectServer = atom(
 );
 
 
-
-export const isInLobbyAtom = atom(false);
-
 export const gamesAtom = atom([GameTypes.shengji]);
 
 // Atom to hold the selected game, initially null
@@ -61,7 +58,6 @@ export const disconnectAtom = atom(
 	(get, set) => {
 		set(pageStateAtom, "login")
 		set(userPlayerIDAtom, "")
-		set(isInLobbyAtom, false)
 		set(sessionIDAtom, null)
 		set(isGameConfiguredAtom, false)
 		set(playerAttributesAtom, null)
@@ -70,7 +66,6 @@ export const disconnectAtom = atom(
 		disconnect()
 	}
 );
-
 
 
 //Back and Next Buttons

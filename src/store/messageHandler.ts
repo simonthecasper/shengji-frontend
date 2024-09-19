@@ -1,7 +1,6 @@
 import { atom } from "jotai/vanilla";
 
 import { sessionIDAtom } from "./store";
-import { isInLobbyAtom } from "./store";
 import { userPlayerIDAtom } from "./store";
 import { playerAttributesAtom } from "./store";
 import { hostPlayerIDAtom } from "./store";
@@ -19,11 +18,8 @@ export const messageHandlerAtom = atom(
 		if (stage === "prelobby") {
 			if (task === "join_session_ack") {
 				if (get(sessionIDAtom) === null) {
-					const player_id = messageObject.player_id
-
-					set(userPlayerIDAtom, player_id)
+					set(userPlayerIDAtom, messageObject.player_id)
 					set(sessionIDAtom, messageObject.session_id)
-					set(isInLobbyAtom, true)
 
 					if (get(pageStateAtom) === "connect_session") {
 						set(pageStateAtom, "lobby")

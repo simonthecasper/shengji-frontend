@@ -21,9 +21,6 @@ export const pageStateAtom = atom("login",
 
             set(nextButtonActiveAtom, get(hostPlayerIDAtom) === get(userPlayerIDAtom))
             set(nextButtonTextAtom, get(nextButtonActiveAtom) ? "Configure Game" : "Button Disabled")
-
-            console.log(get(backButtonTextAtom))
-            console.log(get(nextButtonTextAtom))
         }
     }
 );
