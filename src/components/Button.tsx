@@ -32,9 +32,12 @@
   Pass your control value to the prop. e.g.
   <Button disable={true}> text goes here </Button>
   */
+
+import ButtonTypes from "../types/ButtonTypes";
+
 interface Props {
     children: string;
-    bg?: "primary" | "secondary" | "danger" | "inactive" | "primary_selected";
+    bg?: ButtonTypes;
     margin?: string;
     padding?: string;
     onClick: () => void;

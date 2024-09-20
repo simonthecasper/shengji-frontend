@@ -1,13 +1,26 @@
-import { useAtomValue } from "jotai/react";
+import { useAtom, useAtomValue, useSetAtom } from "jotai/react";
+import {
+    hostPlayerIDAtom,
+    playerAttributesAtom,
+    sessionIDAtom,
+    nextButtonTextAtom,
+    backButtonClickAtom,
+    attributesAndHostSignalAtom,
+    nextButtonClickAtom,
+    nextButtonStyleAtom,
+} from "../store/store";
 import { pageStateAtom } from "../store/pageStateAtom";
 import { Fragment } from "react/jsx-runtime";
 import LobbyPage from "./LobbyPage";
-import ChatBox from "../components/ChatBox"
+import ChatBox from "../components/ChatBox";
 import BaseNavigation from "../components/BaseNavigation";
+import NestedAnyObj from "../types/utility/NestedAnyObj";
 
 //  TODO: plan to style grid for Pregame and preLobby pages
 const BaseGameLayer = () => {
     const pageState = useAtomValue(pageStateAtom);
+
+    const nextButtonStyle = useAtomValue(nextButtonStyleAtom);
 
     const layerContent = () => {
         let output = <Fragment />;
@@ -22,7 +35,7 @@ const BaseGameLayer = () => {
             {layerContent()}
             <ChatBox />
         </div>
-    )
-}
+    );
+};
 
 export default BaseGameLayer;
