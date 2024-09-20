@@ -61,11 +61,10 @@ export const hostPlayerIDAtom = atom(null,
 		if (get(playerAttributesAtom) != null && get(hostPlayerIDAtom) != null)
 			set(attributesAndHostSignalAtom, true)
 		else
-			set(attributesAndHostSignalAtom, false)
+		set(attributesAndHostSignalAtom, false)
 	}
 );
-export const hostPlayerUsernameAtom = atom("");
-export const attributesAndHostSignalAtom = atom(false);
+export const attributesAndHostSignalAtom = atom(false); //Set to true once hostPlayerID and playerAttributes are both received
 
 
 // Game Selection atoms
@@ -114,7 +113,7 @@ export const nextButtonTextAtom = atom("Placeholder");
 export const nextButtonActiveAtom = atom(true);
 export const nextButtonClickAtom = atom(
 	() => '',
-	(get, set) => {
+			(get, set) => {
 
 	}
 );
