@@ -28,10 +28,48 @@ export const nameAndConnectServer = atom(
 	}
 );
 
+export const listOfPlayersAtom = atom([" "]);
 
+export const isGameConfiguredAtom = atom(false);
+
+// BaseGameLayer display atoms
+export const sessionIDAtom = atom(null);
+interface NestedObj {
+	[key: string]: string
+}
+
+interface LooseObj {
+	[key: string]: NestedObj
+}
+
+type AttributeType = LooseObj | null
+
+export const playerAttributesAtom = atom(null as LooseObj | null,
+	(get, set, input: AttributeType) => {
+		set(playerAttributesAtom, input)
+
+		if (get(playerAttributesAtom) != null && get(hostPlayerIDAtom) != null)
+			set(attributesAndHostSignalAtom, true)
+		else
+			set(attributesAndHostSignalAtom, false)
+	}
+);
+export const hostPlayerIDAtom = atom(null,
+	(get, set, input: string | null) => {
+		set(hostPlayerIDAtom, input)
+
+		if (get(playerAttributesAtom) != null && get(hostPlayerIDAtom) != null)
+			set(attributesAndHostSignalAtom, true)
+		else
+			set(attributesAndHostSignalAtom, false)
+	}
+);
+export const hostPlayerUsernameAtom = atom("");
+export const attributesAndHostSignalAtom = atom(false);
+
+
+// Game Selection atoms
 export const gamesAtom = atom([GameTypes.shengji]);
-
-// Atom to hold the selected game, initially null
 export const selectedGameAtom = atom("", // initial value
 	(get, set, selectedGame: string) => {
 		const games = get(gamesAtom);
@@ -42,20 +80,12 @@ export const selectedGameAtom = atom("", // initial value
 	}
 );
 
-export const listOfPlayersAtom = atom([" "]);
 
-export const sessionIDAtom = atom(null);
-
-export const isGameConfiguredAtom = atom(false);
-
-export const playerAttributesAtom = atom(null);
-
-export const hostPlayerIDAtom = atom(null);
 
 // Resets relevant atom values and fully disconnects user from server
 export const disconnectAtom = atom(
 	() => '',
-	(get, set) => {
+	(_get, set) => {
 		set(pageStateAtom, "login")
 		set(userPlayerIDAtom, "")
 		set(sessionIDAtom, null)
@@ -71,7 +101,7 @@ export const disconnectAtom = atom(
 //Back and Next Buttons
 export const backButtonTextAtom = atom("Placeholder");
 export const backButtonActiveAtom = atom(true);
-export const backButtonClickAtom = atom (
+export const backButtonClickAtom = atom(
 	() => '',
 	(get, set) => {
 		if (get(pageStateAtom) === "lobby") {
@@ -82,9 +112,9 @@ export const backButtonClickAtom = atom (
 
 export const nextButtonTextAtom = atom("Placeholder");
 export const nextButtonActiveAtom = atom(true);
-export const nextButtonClickAtom = atom (
+export const nextButtonClickAtom = atom(
 	() => '',
 	(get, set) => {
-		
+
 	}
 );

@@ -12,6 +12,7 @@ import { pageStateAtom } from "../store/pageStateAtom";
 import { Fragment } from "react/jsx-runtime";
 import Button from "../components/Button";
 import LobbyPage from "./LobbyPage";
+import ChatBox from "../components/ChatBox"
 
 const BaseGameLayer = () => {
     const [pageState] = useAtom(pageStateAtom);
@@ -61,9 +62,11 @@ const BaseGameLayer = () => {
                 </Button>
             </div>
             {layerContent()}
-            <div id="chatBoxContainer">Chatbox</div>
+            <div id="chatBoxContainer">
+                <ChatBox />
+            </div>
         </div>
-    );
-};
+    )
+}
 
 export default BaseGameLayer;
