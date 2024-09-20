@@ -1,9 +1,3 @@
-// export const GameTypes = [
-//     'ShengJi',
-//     'original',
-//     'test2',
-//     'crazy_lvl'
-// ]
 
 export const GameTypes = {
     ShengJi : {
@@ -19,3 +13,4 @@ export const GameTypes = {
         players : [1]
     }
 }
+
