@@ -2,6 +2,7 @@ import { disconnect, initSocketConnection } from "../socket/socket";
 import { atom } from 'jotai/vanilla'
 import { GameTypes } from "../enums/GameTypes.ts";
 import { pageStateAtom } from "./pageStateAtom.ts";
+import NestedAnyObj from "../types/utility/NestedAnyObj.ts";
 
 export const userAtom = atom<string>('');
 export const userPlayerIDAtom = atom<string>('');
@@ -34,18 +35,10 @@ export const isGameConfiguredAtom = atom(false);
 
 // BaseGameLayer display atoms
 export const sessionIDAtom = atom(null);
-interface NestedObj {
-	[key: string]: string
-}
 
-interface LooseObj {
-	[key: string]: NestedObj
-}
 
-type AttributeType = LooseObj | null
-
-export const playerAttributesAtom = atom(null as LooseObj | null,
-	(get, set, input: AttributeType) => {
+export const playerAttributesAtom = atom(null as NestedAnyObj | null,
+	(get, set, input: NestedAnyObj | null) => {
 		set(playerAttributesAtom, input)
 
 		if (get(playerAttributesAtom) != null && get(hostPlayerIDAtom) != null)
@@ -61,7 +54,7 @@ export const hostPlayerIDAtom = atom(null,
 		if (get(playerAttributesAtom) != null && get(hostPlayerIDAtom) != null)
 			set(attributesAndHostSignalAtom, true)
 		else
-		set(attributesAndHostSignalAtom, false)
+			set(attributesAndHostSignalAtom, false)
 	}
 );
 export const attributesAndHostSignalAtom = atom(false); //Set to true once hostPlayerID and playerAttributes are both received
@@ -113,7 +106,7 @@ export const nextButtonTextAtom = atom("Placeholder");
 export const nextButtonActiveAtom = atom(true);
 export const nextButtonClickAtom = atom(
 	() => '',
-			(get, set) => {
+	(get, set) => {
 
 	}
 );

@@ -6,6 +6,7 @@ import {
     sessionIDAtom,
     nextButtonTextAtom,
     backButtonClickAtom,
+    attributesAndHostSignalAtom,
     nextButtonClickAtom,
 } from "../store/store";
 import { pageStateAtom } from "../store/pageStateAtom";
@@ -13,7 +14,7 @@ import { Fragment } from "react/jsx-runtime";
 import Button from "../components/Button";
 import LobbyPage from "./LobbyPage";
 import ChatBox from "../components/ChatBox"
-import { attributesAndHostSignalAtom } from "../store/store";
+import NestedAnyObj from "../types/utility/NestedAnyObj";
 
 const BaseGameLayer = () => {
     const [pageState] = useAtom(pageStateAtom);
@@ -24,7 +25,7 @@ const BaseGameLayer = () => {
     const attributesAndHostSignal = useAtomValue(attributesAndHostSignalAtom);
 
     const hostPlayerUsername = attributesAndHostSignal
-        ? playerAttributes[hostPlayerID].username
+        ? (playerAttributes as NestedAnyObj)[hostPlayerID!].username
         : "";
 
     const backButtonText = useAtomValue(backButtonTextAtom);
