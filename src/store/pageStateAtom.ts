@@ -20,7 +20,7 @@ export const pageStateAtom = atom("login",
             set(backButtonActiveAtom, true)
 
             set(nextButtonActiveAtom, get(hostPlayerIDAtom) === get(userPlayerIDAtom))
-            set(nextButtonTextAtom, get(nextButtonActiveAtom) ? "Configure Game" : "Button Disabled")
+            set(nextButtonTextAtom, "Select a Game")
         }
     }
 );

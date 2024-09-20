@@ -1,6 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai/react";
 import {
-    backButtonTextAtom,
     hostPlayerIDAtom,
     playerAttributesAtom,
     sessionIDAtom,
@@ -8,12 +7,13 @@ import {
     backButtonClickAtom,
     attributesAndHostSignalAtom,
     nextButtonClickAtom,
+    nextButtonStyleAtom,
 } from "../store/store";
 import { pageStateAtom } from "../store/pageStateAtom";
 import { Fragment } from "react/jsx-runtime";
 import Button from "../components/Button";
 import LobbyPage from "./LobbyPage";
-import ChatBox from "../components/ChatBox"
+import ChatBox from "../components/ChatBox";
 import NestedAnyObj from "../types/utility/NestedAnyObj";
 
 const BaseGameLayer = () => {
@@ -33,6 +33,8 @@ const BaseGameLayer = () => {
 
     const backButtonClick = useSetAtom(backButtonClickAtom);
     const nextButtonClick = useSetAtom(nextButtonClickAtom);
+
+    const nextButtonStyle = useAtomValue(nextButtonStyleAtom);
 
     const layerContent = () => {
         let output = <Fragment />;
@@ -62,7 +64,7 @@ const BaseGameLayer = () => {
                     </h1>
                     <h2>Lobby ID: {sessionId}</h2>
                 </div>
-                <Button bg="secondary" onClick={nextButtonOnClick}>
+                <Button bg={nextButtonStyle} onClick={nextButtonOnClick}>
                     {nextButtonText}
                 </Button>
             </div>
@@ -71,7 +73,7 @@ const BaseGameLayer = () => {
                 <ChatBox />
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default BaseGameLayer;
