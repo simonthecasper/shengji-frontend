@@ -1,11 +1,12 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai/react";
 import {
-    hostPlayerIDAtom,
     playerAttributesAtom,
     sessionIDAtom,
+    hostPlayerIDAtom,
+    attributesAndHostSignalAtom,
+    backButtonTextAtom,
     nextButtonTextAtom,
     backButtonClickAtom,
-    attributesAndHostSignalAtom,
     nextButtonClickAtom,
     nextButtonStyleAtom,
 } from "../store/store";
@@ -15,6 +16,8 @@ import Button from "../components/Button";
 import LobbyPage from "./LobbyPage";
 import ChatBox from "../components/ChatBox";
 import NestedAnyObj from "../types/utility/NestedAnyObj";
+
+//Bunch of atom imports are not working for some reason
 
 const BaseGameLayer = () => {
     const [pageState] = useAtom(pageStateAtom);
