@@ -20,7 +20,6 @@ import NestedAnyObj from "../types/utility/NestedAnyObj";
 //  TODO: plan to style grid for Pregame and preLobby pages
 const BaseGameLayer = () => {
     const pageState = useAtomValue(pageStateAtom);
-
     const nextButtonStyle = useAtomValue(nextButtonStyleAtom);
 
     const layerContent = () => {
