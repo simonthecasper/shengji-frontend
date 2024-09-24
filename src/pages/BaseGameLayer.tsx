@@ -1,4 +1,4 @@
-import { useAtom } from "jotai/react";
+import { useAtomValue } from "jotai/react";
 import { pageStateAtom } from "../store/pageStateAtom";
 import { Fragment } from "react/jsx-runtime";
 import LobbyPage from "./LobbyPage";
@@ -6,7 +6,7 @@ import ChatBox from "../components/ChatBox"
 import BaseNavigation from "../components/BaseNavigation";
 
 const BaseGameLayer = () => {
-    const [pageState] = useAtom(pageStateAtom);
+    const pageState = useAtomValue(pageStateAtom);
 
     const layerContent = () => {
         let output = <Fragment />;
@@ -19,9 +19,7 @@ const BaseGameLayer = () => {
         <div id="baseLayerContainer" className="fillContainer">
             <BaseNavigation />
             {layerContent()}
-            <div id="chatBoxContainer">
-                <ChatBox />
-            </div>
+            <ChatBox />
         </div>
     )
 }
