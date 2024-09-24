@@ -1,38 +1,12 @@
-import { useAtom, useAtomValue, useSetAtom } from "jotai/react";
-import {
-    backButtonTextAtom,
-    hostPlayerIDAtom,
-    playerAttributesAtom,
-    sessionIDAtom,
-    nextButtonTextAtom,
-    backButtonClickAtom,
-    attributesAndHostSignalAtom,
-    nextButtonClickAtom,
-} from "../store/store";
+import { useAtom } from "jotai/react";
 import { pageStateAtom } from "../store/pageStateAtom";
 import { Fragment } from "react/jsx-runtime";
-import Button from "../components/Button";
 import LobbyPage from "./LobbyPage";
 import ChatBox from "../components/ChatBox"
-import NestedAnyObj from "../types/utility/NestedAnyObj";
+import BaseNavigation from "../components/BaseNavigation";
 
 const BaseGameLayer = () => {
     const [pageState] = useAtom(pageStateAtom);
-    const sessionId = useAtomValue(sessionIDAtom);
-
-    const playerAttributes = useAtomValue(playerAttributesAtom);
-    const hostPlayerID = useAtomValue(hostPlayerIDAtom);
-    const attributesAndHostSignal = useAtomValue(attributesAndHostSignalAtom);
-
-    const hostPlayerUsername = attributesAndHostSignal
-        ? (playerAttributes as NestedAnyObj)[hostPlayerID!].username
-        : "";
-
-    const backButtonText = useAtomValue(backButtonTextAtom);
-    const nextButtonText = useAtomValue(nextButtonTextAtom);
-
-    const backButtonClick = useSetAtom(backButtonClickAtom);
-    const nextButtonClick = useSetAtom(nextButtonClickAtom);
 
     const layerContent = () => {
         let output = <Fragment />;
@@ -40,32 +14,10 @@ const BaseGameLayer = () => {
         return output;
     };
 
-    const backButtonOnClick = () => {
-        backButtonClick();
-    };
-
-    const nextButtonOnClick = () => {
-        nextButtonClick();
-    };
-
     //  TODO: make components for header and chatbox
     return (
         <div id="baseLayerContainer" className="fillContainer">
-            <div id="navigationContainer">
-                <Button bg="danger" onClick={backButtonOnClick}>
-                    {backButtonText}
-                </Button>
-                <div>
-                    <h1>
-                        {hostPlayerUsername.concat("'s ")}
-                        Lobby
-                    </h1>
-                    <h2>Lobby ID: {sessionId}</h2>
-                </div>
-                <Button bg="secondary" onClick={nextButtonOnClick}>
-                    {nextButtonText}
-                </Button>
-            </div>
+            <BaseNavigation />
             {layerContent()}
             <div id="chatBoxContainer">
                 <ChatBox />

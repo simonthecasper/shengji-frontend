@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { socketConnection } from "../socket/socket";
 import { userPlayerIDAtom } from '../store/store';
-import Messages from '../interfaces/Message';
+import Messages from '../types/Message';
 import Button from './Button';
 import { useAtomValue } from 'jotai';
 
