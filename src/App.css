@@ -141,8 +141,13 @@ input[name="username"]::placeholder {
 
 #lobbyContainer {
     width: 100%;
+    grid-area: m;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+}
+
+#lobbyContainer>div {
+    margin-right: 1.5rem;
 }
 
 #baseLayerContainer {
@@ -203,4 +208,12 @@ input[name="username"]::placeholder {
 
 .maxWidth {
     width: 100%;
+}
+
+.textCenter {
+    text-align: center;
+}
+
+.padAllSides {
+    padding: 1rem;
 }
