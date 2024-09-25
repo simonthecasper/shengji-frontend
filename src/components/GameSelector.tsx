@@ -20,7 +20,7 @@ const GameSelector = () => {
 
     //TODO: implement styling
     return (
-        <div className="gameSelector textCenter padAllSides">
+        <div className="gameSelector spaceContents ">
             <h2>Select a Game</h2>
             <div className="gameTileContainer">
                 {games.map((game) => {

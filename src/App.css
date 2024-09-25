@@ -1,5 +1,9 @@
 /* StartPage.css */
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     background-color: #15202B;
@@ -9,12 +13,14 @@ body {
     margin: 0;
 }
 
-h1 {
+h1,
+h2 {
     margin: 0;
 }
 
-h2 {
-    margin: 0;
+ul {
+    list-style: none;
+    padding: 0;
 }
 
 .baseInput {
@@ -34,57 +40,6 @@ input[name="username"] {
 
 input[name="username"]::placeholder {
     color: #657786;
-}
-
-.btn {
-    --_inactiveBg: var(--inactiveBg);
-    --_hoverBg: var(--hoverBg);
-    --_activeBg: var(--activeBg);
-    padding: 1rem 1.25rem;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    border-radius: 1.25rem;
-    background-color: var(--_inactiveBg);
-    color: #ffffff;
-}
-
-.btn:hover {
-    background-color: var(--_hoverBg);
-}
-
-.btn:active {
-    background-color: var(--_activeBg);
-}
-
-.primary {
-    --inactiveBg: #1DA1F2;
-    --hoverBg: #1a8cd8;
-    --activeBg: #0d95e8;
-}
-
-.secondary {
-    --inactiveBg: #30be45;
-    --hoverBg: #5faa6a;
-    --activeBg: #86f095;
-}
-
-.danger {
-    --inactiveBg: #f3185c;
-    --hoverBg: #ac4162;
-    --activeBg: #eb618c;
-}
-
-#root,
-.StartPage {
-    width: 100%;
-    height: 100%;
-}
-
-.StartPage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 @keyframes FadeIn {
@@ -144,10 +99,19 @@ input[name="username"]::placeholder {
     grid-area: m;
     display: flex;
     justify-content: space-between;
+    text-align: center;
+}
+
+#lobbyContainer>div:first-child {
+    margin-left: 1rem;
 }
 
 #lobbyContainer>div {
     margin-right: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 2rem;
+    width: 100%;
+    border: solid;
 }
 
 #baseLayerContainer {
@@ -180,6 +144,18 @@ input[name="username"]::placeholder {
     border: solid;
 }
 
+#root,
+.StartPage {
+    width: 100%;
+    height: 100%;
+}
+
+.StartPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .userLogin>*:first-child {
     text-align: center;
     margin: 0 0 1rem 0;
@@ -200,6 +176,51 @@ input[name="username"]::placeholder {
     font-size: 1.5rem;
 }
 
+.btn {
+    --_inactiveBg: var(--inactiveBg);
+    --_hoverBg: var(--hoverBg);
+    --_activeBg: var(--activeBg);
+    padding: 1rem 1.25rem;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-radius: 1.25rem;
+    background-color: var(--_inactiveBg);
+    color: #ffffff;
+}
+
+.btn:hover {
+    background-color: var(--_hoverBg);
+}
+
+.btn:active {
+    background-color: var(--_activeBg);
+}
+
+.primary {
+    --inactiveBg: #1DA1F2;
+    --hoverBg: #1a8cd8;
+    --activeBg: #0d95e8;
+}
+
+.secondary {
+    --inactiveBg: #30be45;
+    --hoverBg: #5faa6a;
+    --activeBg: #86f095;
+}
+
+.danger {
+    --inactiveBg: #f3185c;
+    --hoverBg: #ac4162;
+    --activeBg: #eb618c;
+}
+
+.playerList>div {
+    padding: 1rem;
+    height: 100%;
+    border: solid;
+}
+
 /* Utility Classes*/
 .fillContainer {
     width: 100%;
@@ -210,10 +231,10 @@ input[name="username"]::placeholder {
     width: 100%;
 }
 
-.textCenter {
-    text-align: center;
-}
-
 .padAllSides {
     padding: 1rem;
+}
+
+.spaceContents>*+* {
+    margin-top: 1rem;
 }

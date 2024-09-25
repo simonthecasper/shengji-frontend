@@ -16,22 +16,24 @@ const ListOfPlayers = () => {
 
     //TODO: implement styling
     return (
-        <div className="playerList textCenter padAllSides">
-            <h2>Player List</h2>
-            <ul>
-                {listOfPlayers.map((player) => {
-                    return (
-                        <li key={player}>
-                            {attributesAndHostSignal
-                                ? (playerAttributes as NestedAnyObj)[player]["username"] +
-                                (hostPlayerID === player
-                                    ? " (lobby host)"
-                                    : "")
-                                : ""}
-                        </li>
-                    );
-                })}
-            </ul>
+        <div className="playerList">
+            <div>
+                <h2>Player List</h2>
+                <ul className="spaceContents">
+                    {listOfPlayers.map((player) => {
+                        return (
+                            <li key={player}>
+                                {attributesAndHostSignal
+                                    ? (playerAttributes as NestedAnyObj)[player]["username"] +
+                                    (hostPlayerID === player
+                                        ? " (lobby host)"
+                                        : "")
+                                    : ""}
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
         </div>
     );
 };
