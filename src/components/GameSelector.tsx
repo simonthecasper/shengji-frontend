@@ -5,6 +5,7 @@ import {
     hostPlayerIDAtom,
     userPlayerIDAtom,
 } from "../store/store";
+import Button from "./Button";
 
 const GameSelector = () => {
     const selectedGame = useAtomValue(selectedGameAtom);
@@ -18,25 +19,24 @@ const GameSelector = () => {
         setSelectedGame(game);
     }
 
-    //TODO: implement styling
+    //  TODO: add optional disabled Button Prop
     return (
         <div className="gameSelector spaceContents ">
             <h2>Select a Game</h2>
             <div className="gameTileContainer">
                 {games.map((game) => {
                     return (
-                        <div key={game}>
-                            <button
-                                className="gameTile"
-                                onClick={() => selectGame(game)}
-                                disabled={
-                                    game === selectedGame ||
-                                    userPlayerID != hostPlayerID
-                                }
-                            >
-                                {game}
-                            </button>
-                        </div>
+                        <Button
+                            key={game}
+                            bg="primary"
+                            onClick={() => selectGame(game)}
+                            disabled={
+                                game === selectedGame ||
+                                userPlayerID != hostPlayerID
+                            }
+                        >
+                            {game}
+                        </Button>
                     );
                 })}
             </div>

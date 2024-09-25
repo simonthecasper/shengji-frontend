@@ -23,6 +23,10 @@ ul {
     padding: 0;
 }
 
+div {
+    border-radius: 1rem;
+}
+
 .baseInput {
     padding: 10px;
     margin: 10px 0;
@@ -163,17 +167,6 @@ input[name="username"]::placeholder {
 
 .gameTileContainer {
     display: flex;
-}
-
-.gameTile {
-    border-radius: 0;
-    padding: 2rem;
-    transition: all 150ms;
-}
-
-.gameTile:hover {
-    padding: 3rem;
-    font-size: 1.5rem;
 }
 
 .btn {
