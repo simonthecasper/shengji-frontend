@@ -110,3 +110,4 @@ export const nextButtonClickAtom = atom(
 
 	}
 );
+export const collapsedChatBoxAtom = atom(true)

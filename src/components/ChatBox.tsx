@@ -61,7 +61,7 @@ const ChatBox = () => {
                 style={{ height: '300px', overflowY: 'scroll', border: '1px solid black' }}>
                 {contents()}
             </div>
-            <input ref={input} type="" />
+            <input className="baseInput" ref={input} type="" />
             <Button bg="primary" onClick={sendNewMessage}>Send Message</Button>
         </div>
     );

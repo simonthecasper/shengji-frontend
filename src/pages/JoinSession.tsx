@@ -34,7 +34,7 @@ function JoinSession() {
                 />
                 <Button margin="0 0 0 1rem" bg="primary" onClick={joinSession}>
                     Join Session
-                </Button>{" "}
+                </Button>
             </div>
         </>
     );
