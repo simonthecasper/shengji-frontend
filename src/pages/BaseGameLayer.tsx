@@ -5,6 +5,7 @@ import LobbyPage from "./LobbyPage";
 import ChatBox from "../components/ChatBox"
 import BaseNavigation from "../components/BaseNavigation";
 
+//  TODO: plan to style grid for Pregame and preLobby pages
 const BaseGameLayer = () => {
     const pageState = useAtomValue(pageStateAtom);
 

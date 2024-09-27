@@ -46,27 +46,6 @@ input[name="username"]::placeholder {
     color: #657786;
 }
 
-@keyframes FadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes FadeOut {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-        display: none;
-    }
-}
-
 #welcome {
     position: fixed;
     margin: 0;
@@ -118,6 +97,7 @@ input[name="username"]::placeholder {
     border: solid;
 }
 
+/* consider flexbox to shrink Chatbox or to make the chat box disappear and reappear?*/
 #baseLayerContainer {
     display: grid;
     grid-template:
@@ -215,6 +195,27 @@ input[name="username"]::placeholder {
 }
 
 /* Utility Classes*/
+@keyframes FadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes FadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        display: none;
+    }
+}
+
 .fillContainer {
     width: 100%;
     height: 100%;
