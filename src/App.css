@@ -190,6 +190,41 @@ div {
     border: solid;
 }
 
+.header {
+    display: flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.header-title {
+    flex-grow: 1;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.button {
+    width: 12px;
+    height: 12px;
+    border-radius: 0 0 50% 50%;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.button.minimize {
+    background-color: #ffcc00;
+}
+
 /* Utility Classes*/
 @keyframes FadeIn {
     0% {
