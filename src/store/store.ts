@@ -2,10 +2,11 @@ import { disconnect, initSocketConnection } from "../socket/socket";
 import { atom } from 'jotai/vanilla'
 import { GameTypes } from "../enums/GameTypes.ts";
 import { pageStateAtom } from "./pageStateAtom.ts";
-import NestedAnyObj from "../types/utility/NestedAnyObj.ts";
 import { C2S_createGame } from "../socket/C2SMessages.ts";
 
+import NestedAnyObj from "../types/utility/NestedAnyObj.ts";
 import ButtonTypes from "../types/ButtonTypes.ts";
+
 
 export const userAtom = atom<string>('');
 export const userPlayerIDAtom = atom<string>('');
@@ -37,7 +38,7 @@ export const listOfPlayersAtom = atom([" "]);
 export const isGameConfiguredAtom = atom(false);
 
 // BaseGameLayer display atoms
-export const sessionIDAtom = atom("");
+export const sessionIDAtom = atom('');
 export const playerCountAtom = atom(0);
 
 export const playerAttributesAtom = atom(null as NestedAnyObj | null,
@@ -52,14 +53,15 @@ export const playerAttributesAtom = atom(null as NestedAnyObj | null,
 	}
 );
 
-export const hostPlayerIDAtom = atom("",
+export const hostPlayerIDAtom = atom('',
 	(get, set, input:string) => {
 		set(hostPlayerIDAtom, input)
 
-		if (get(playerAttributesAtom) != null && get(hostPlayerIDAtom) != null)
+		if (get(playerAttributesAtom) != null && get(hostPlayerIDAtom) != null) {
 			set(attributesAndHostSignalAtom, true)
-		else
+		} else {
 			set(attributesAndHostSignalAtom, false)
+		}
 	}
 );
 export const attributesAndHostSignalAtom = atom(false); //Set to true once hostPlayerID and playerAttributes are both received
@@ -68,7 +70,7 @@ export const attributesAndHostSignalAtom = atom(false); //Set to true once hostP
 // Game Selection atoms
 export const gamesDataAtom = atom(GameTypes)
 export const gamesAtom = atom(Object.keys(GameTypes));
-export const selectedGameAtom = atom("", // initial value
+export const selectedGameAtom = atom('', // initial value
 	(get, set, selectedGame: string) => {
 		const games = get(gamesAtom);
 		console.log('selectedGame: ', selectedGame);
@@ -98,12 +100,12 @@ export const disconnectAtom = atom(
 	() => '',
 	(_get, set) => {
 		set(pageStateAtom, "login")
-		set(userPlayerIDAtom, "")
-		set(sessionIDAtom, "")
+		set(userPlayerIDAtom, '')
+		set(sessionIDAtom, '')
 		set(isGameConfiguredAtom, false)
-		set(playerAttributesAtom, "")
-		set(hostPlayerIDAtom, "")
-		set(selectedGameAtom, "")
+		set(playerAttributesAtom, {})
+		set(hostPlayerIDAtom, '')
+		set(selectedGameAtom, '')
 		disconnect()
 	}
 );

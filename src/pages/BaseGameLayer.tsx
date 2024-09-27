@@ -1,11 +1,12 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai/react";
 import {
-    hostPlayerIDAtom,
     playerAttributesAtom,
     sessionIDAtom,
+    hostPlayerIDAtom,
+    attributesAndHostSignalAtom,
+    backButtonTextAtom,
     nextButtonTextAtom,
     backButtonClickAtom,
-    attributesAndHostSignalAtom,
     nextButtonClickAtom,
     nextButtonStyleAtom,
 } from "../store/store";
