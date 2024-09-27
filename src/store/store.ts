@@ -61,7 +61,7 @@ export const attributesAndHostSignalAtom = atom(false); //Set to true once hostP
 
 
 // Game Selection atoms
-export const gamesAtom = atom([GameTypes.shengji]);
+export const gamesAtom = atom(GameTypes);
 export const selectedGameAtom = atom("", // initial value
 	(get, set, selectedGame: string) => {
 		const games = get(gamesAtom);

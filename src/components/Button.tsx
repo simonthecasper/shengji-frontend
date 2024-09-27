@@ -34,7 +34,7 @@
   */
 interface Props {
     children: string;
-    bg?: "primary" | "secondary" | "danger";
+    bg?: "primary" | "secondary" | "danger" | "inactive" | "primary_selected";
     margin?: string;
     padding?: string;
     onClick: () => void;

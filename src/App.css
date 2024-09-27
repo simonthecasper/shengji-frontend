@@ -188,8 +188,25 @@ input[name="username"]::placeholder {
     --activeBg: #eb618c;
 }
 
+.inactive {
+    --inactiveBg: #7e7e7e;
+    --hoverBg: #7e7e7e;
+    --activeBg: #7e7e7e;
+}
+
+.primary_selected {
+    --inactiveBg: #093ada;
+    --hoverBg: #093ada;
+    --activeBg: #093ada;
+}
+
 .playerList>div {
     padding: 1rem;
+}
+
+#root,
+.StartPage {
+    width: 100%;
     height: 100%;
     border: solid;
 }

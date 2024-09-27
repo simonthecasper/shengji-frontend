@@ -15,6 +15,8 @@ const GameSelector = () => {
     const userPlayerID = useAtomValue(userPlayerIDAtom);
     const hostPlayerID = useAtomValue(hostPlayerIDAtom);
 
+    const isHost = userPlayerID === hostPlayerID;
+
     function selectGame(game: string) {
         setSelectedGame(game);
     }
@@ -26,17 +28,35 @@ const GameSelector = () => {
             <div className="gameTileContainer">
                 {games.map((game) => {
                     return (
-                        <Button
-                            key={game}
-                            bg="primary"
-                            onClick={() => selectGame(game)}
-                            disabled={
-                                game === selectedGame ||
-                                userPlayerID != hostPlayerID
-                            }
-                        >
-                            {game}
-                        </Button>
+                        <div key={game}>
+                            <Button
+                                bg={
+                                    !isHost
+                                        ? "inactive"
+                                        : game === selectedGame
+                                        ? "primary_selected"
+                                        : "primary"
+                                }
+                                onClick={() => selectGame(game)}
+                                disabled={
+                                    game === selectedGame ||
+                                    userPlayerID != hostPlayerID
+                                }
+                            >
+                                {game}
+                            </Button>
+
+                            {/* <button
+                                className="gameTile"
+                                onClick={() => selectGame(game)}
+                                disabled={
+                                    game === selectedGame ||
+                                    userPlayerID != hostPlayerID
+                                }
+                            >
+                                {game}
+                            </button> */}
+                        </div>
                     );
                 })}
             </div>
