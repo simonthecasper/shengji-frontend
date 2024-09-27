@@ -31,3 +31,15 @@ export function C2S_createGame(session_id: string, host_player_id: string) {
 
     sendData("test_message", messageObject);
 }
+
+export function C2S_sendChat(session_id: string, player_id: string, message: string) {
+    let messageObject = {
+        task: "send_chat",
+        stage: "chat",
+        player_id: player_id,
+        session_id: session_id,
+        message: message,
+    };
+
+    sendData("test_message", messageObject);
+}

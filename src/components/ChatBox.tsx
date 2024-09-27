@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { socketConnection } from "../socket/socket";
-import { userPlayerIDAtom } from "../store/store";
+import { sessionIDAtom, userPlayerIDAtom } from "../store/store";
 import Messages from "../types/Message";
 import Button from "./Button";
 import { useAtomValue } from "jotai";
+import { C2S_sendChat } from "../socket/C2SMessages";
 
 const ChatBox = () => {
     const messageContainerRef = useRef(null);
@@ -11,14 +12,11 @@ const ChatBox = () => {
     const [messages, setMessages] = useState<Messages[]>(new Array<Messages>());
     const input = useRef<HTMLInputElement>(null);
     const userPlayerID = useAtomValue(userPlayerIDAtom);
+    const sessionID = useAtomValue(sessionIDAtom);
 
     const sendNewMessage = () => {
         if (input.current) {
-            const sender: Messages = {
-                player_id: userPlayerID,
-                message: input.current.value,
-            };
-            sc.send(sender);
+            C2S_sendChat(sessionID, userPlayerID, input.current.value);
             input.current.value = "";
         }
     };

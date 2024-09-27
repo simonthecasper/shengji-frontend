@@ -1,7 +1,7 @@
 
 export const GameTypes = {
     ShengJi : {
-        players : [4, 6, 8]
+        players : [1, 2, 3, 4, 6, 8]
     },
     original : {
         players : [2]
