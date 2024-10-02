@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { socketConnection } from "../socket/socket";
-import { playerAttributesAtom, sessionIDAtom, userPlayerIDAtom } from '../store/store';
+import { sessionIDAtom, userPlayerIDAtom } from '../store/store';
 import Button from './Button';
-import { useAtomValue } from 'jotai';
-import IncomingServerChatMessages from '../types/Message';
-import NestedAnyObj from '../types/utility/NestedAnyObj';
+import { useAtomValue, useSetAtom } from 'jotai';
+// import IncomingServerChatMessages from '../types/Message';
+// import NestedAnyObj from '../types/utility/NestedAnyObj';
+import { chatHandlerAtom, chatMessagesAtom } from '../store/chatHandler';
 
 interface ChatMsgs {
     userName: string;
@@ -13,11 +14,13 @@ interface ChatMsgs {
 
 const ChatBox = () => {
     const sc = socketConnection;
-    const [messages, setMessages] = useState<ChatMsgs[]>(new Array<ChatMsgs>())
+    // const [messages, setMessages] = useState<ChatMsgs[]>(new Array<ChatMsgs>())
+    const chatHandler = useSetAtom(chatHandlerAtom);
     const input = useRef<HTMLInputElement>(null)
     const userPlayerID = useAtomValue(userPlayerIDAtom)
     const sessionId = useAtomValue(sessionIDAtom) as string | null
-    const players = useAtomValue(playerAttributesAtom) as NestedAnyObj
+    const messages = useAtomValue(chatMessagesAtom)
+    // const players = useAtomValue(playerAttributesAtom) as NestedAnyObj
 
     const sendNewMessage = () => {
         if (input.current) {
@@ -34,30 +37,11 @@ const ChatBox = () => {
     }
 
     useEffect(() => {
-        console.log("players outside sc.on: ", players)
-        // Listen for new messages from the WebSocket
-        sc.on('chat_message', (message: string) => {
-            const messageObject = JSON.parse(message) as IncomingServerChatMessages;
-            console.log("Incoming message: ", messageObject)
-            console.log("players inside sc.on: ", players)
-            if (players !== null) {
-                const playerName = players[messageObject.player_id].username
-                console.log("spread messages: ", { ...messages })
-                setMessages([...messages, { userName: playerName, text: messageObject.message }])
-            }
-
-
-            // Create a new message element
-            // const messageElement = document.createElement('div');
-            // messageElement.textContent = message;
-            // 
-            // // Append it to the message container
-            // messageContainerRef.current.appendChild(messageElement);
-            //
-            // // Optional: Auto-scroll to the bottom of the chat
-            // messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+        sc.on("chat_message", (message) => {
+            chatHandler(message)
         });
     }, [sc]);
+
     const contents = () => {
         let keys = 0
         return messages.map((msg: ChatMsgs) => {
