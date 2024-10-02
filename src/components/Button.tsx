@@ -8,7 +8,6 @@
   "primary" is of color blue
   "secondary" is of color green
   "danger" is of color red
-  TODO: set up disabled color states
 
   (OPTIONAL) To manually control the margin use the "margin" attribute. It takes a string value 
   that is of the same format of CSS. e.g. 

@@ -37,6 +37,7 @@ export const isGameConfiguredAtom = atom(false);
 export const sessionIDAtom = atom(null);
 
 
+//	TODO: do we need to update due to null value once at prelobby stage?
 export const playerAttributesAtom = atom(null as NestedAnyObj | null,
 	(get, set, input: NestedAnyObj | null) => {
 		set(playerAttributesAtom, input)

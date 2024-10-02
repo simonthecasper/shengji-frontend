@@ -15,7 +15,6 @@ const BaseGameLayer = () => {
         return output;
     };
 
-    //  TODO: make components for header and chatbox
     return (
         <div id="baseLayerContainer" className="fillContainer">
             <BaseNavigation />

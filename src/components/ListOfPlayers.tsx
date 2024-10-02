@@ -14,7 +14,6 @@ const ListOfPlayers = () => {
 
     const attributesAndHostSignal = useAtomValue(attributesAndHostSignalAtom);
 
-    //TODO: implement styling
     return (
         <div className="playerList">
             <div>
