@@ -40,7 +40,11 @@ const ChatBox = () => {
         sc.on("chat_message", (message) => {
             chatHandler(message)
         });
-    }, [sc]);
+
+        return () => {
+            sc.off("chat_message")
+        }
+    }, [sc, chatHandler]);
 
     const contents = () => {
         let keys = 0
