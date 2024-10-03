@@ -51,10 +51,10 @@ const ChatBox = () => {
         return messages.map((msg: ChatMsgs) => {
             return (<div key={keys++}>
                 <div>
-                    {msg.userName}
+                    Player Name: {msg.userName}
                 </div>
                 <div>
-                    {msg.text}
+                    Message Text: {msg.text}
                 </div>
 
             </div>)
@@ -70,7 +70,7 @@ const ChatBox = () => {
                 </div>
             </div>
             <div
-                style={{ height: '300px', overflowY: 'scroll', border: '1px solid black', color: 'red' }}>
+                style={{ height: '300px', overflowY: 'scroll', border: '1px solid black', color: 'red' }} className="spaceContents">
                 {contents()}
             </div>
             <input className="baseInput" ref={input} type="" />
