@@ -2,7 +2,7 @@ import { Fragment, useEffect, useRef } from 'react';
 import { socketConnection } from "../socket/socket";
 import { collapsedChatBoxAtom, sessionIDAtom, userPlayerIDAtom } from '../store/store';
 import Button from './Button';
-import {useAtom, useAtomValue, useSetAtom} from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 // import IncomingServerChatMessages from '../types/Message';
 // import NestedAnyObj from '../types/utility/NestedAnyObj';
 import { chatHandlerAtom, chatMessagesAtom } from '../store/chatHandler';
@@ -35,6 +35,10 @@ const ChatBox = () => {
             sc.send(sender)
             input.current.value = ""
         }
+    }
+
+    const minimizeChatHandler = () => {
+        setCollapsedChat(currentValue => !currentValue)
     }
 
     useEffect(() => {
@@ -86,7 +90,7 @@ const ChatBox = () => {
             <div className="header">
                 <div className="header-title">Component Title</div>
                 <div className="header-buttons">
-                    <div className="button minimize" >-</div>
+                    <div className="button minimize" onClick={minimizeChatHandler} >-</div>
                 </div>
             </div>
             {getChatContents()}
