@@ -1,5 +1,5 @@
 /* StartPage.css */
-.css * {
+* {
     box-sizing: border-box;
 }
 
@@ -74,7 +74,6 @@ div {
 
 #lobbyContainer {
     width: 100%;
-    grid-area: m;
     display: flex;
     justify-content: space-between;
     text-align: center;
@@ -92,15 +91,23 @@ div {
     border: solid;
 }
 
-/* consider flexbox to shrink Chatbox or to make the chat box disappear and reappear?*/
 #baseLayerContainer {
-    display: grid;
-    grid-template:
-        "h h h h" 20%
-        "m m m c"
-        "m m m c"
-        "m m m c";
+    display: flex;
+    flex-direction: column;
     animation: FadeIn 1s backwards;
+}
+
+#baseLayerContainer>*:first-child {
+    height: 15%;
+}
+
+#baseLayerContainer>div:last-child {
+    height: 100%;
+    display: flex;
+}
+
+#baseLayerContainer>div:last-child>div:last-child {
+    width: 25%;
 }
 
 #navigationContainer {
@@ -109,16 +116,13 @@ div {
     margin: 1rem;
     padding: 1rem;
     border: white 1px solid;
-    grid-area: h;
 }
 
 #gamePageContainer {
-    grid-area: m;
     margin: 0 1rem 1rem 1rem;
 }
 
 #chatBoxContainer {
-    grid-area: c;
     margin: 0 1rem 1rem 0;
     border: solid;
 }

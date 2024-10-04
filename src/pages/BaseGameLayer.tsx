@@ -18,8 +18,10 @@ const BaseGameLayer = () => {
     return (
         <div id="baseLayerContainer" className="fillContainer">
             <BaseNavigation />
-            {layerContent()}
-            <ChatBox />
+            <div>
+                {layerContent()}
+                <ChatBox />
+            </div>
         </div>
     )
 }
