@@ -115,6 +115,7 @@ export const disconnectAtom = atom(
 //Back and Next Buttons
 export const backButtonTextAtom = atom("Placeholder");
 export const backButtonActiveAtom = atom(true);
+export const backButtonStyleAtom = atom("danger" as ButtonTypes)
 export const backButtonClickAtom = atom(
 	() => '',
 	(get, set) => {
@@ -128,7 +129,7 @@ export const backButtonClickAtom = atom(
 
 export const nextButtonTextAtom = atom("Placeholder");
 export const nextButtonActiveAtom = atom(true);
-export const nextButtonStyleAtom = atom("inactive" as ButtonTypes)
+export const nextButtonStyleAtom = atom("secondary" as ButtonTypes)
 export const nextButtonClickAtom = atom (
 	() => '',
 	(get, set) => {
