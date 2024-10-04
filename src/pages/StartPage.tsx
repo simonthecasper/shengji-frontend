@@ -17,7 +17,10 @@ function StartPage() {
         sc.on("server_message", (data) => {
             messageHandler(data);
         });
-    }, [sc]);
+        return () => {
+            sc.off("server_message")
+        }
+    }, [sc, messageHandler]);
 
     const routeUser = () => {
         let toReturn = <Fragment />;

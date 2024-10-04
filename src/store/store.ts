@@ -41,6 +41,7 @@ export const isGameConfiguredAtom = atom(false);
 export const sessionIDAtom = atom('');
 export const playerCountAtom = atom(0);
 
+//	TODO: do we need to update due to null value once at prelobby stage?
 export const playerAttributesAtom = atom(null as NestedAnyObj | null,
 	(get, set, input: NestedAnyObj | null) => {
 		set(playerAttributesAtom, input)
@@ -138,3 +139,4 @@ export const nextButtonClickAtom = atom (
 		}
 	}
 );
+export const collapsedChatBoxAtom = atom(true)

@@ -26,22 +26,23 @@ export const messageHandlerAtom = atom(
 					}
 				}
 			} else if (task === "join_session_not_found") {
-                console.log(messageObject.message)
-            }
+				console.log(messageObject.message)
+			}
 		}
 
 		if (stage === "lobby") {
 			if (task === "share_player_attributes") {
-				let player_attributes = messageObject.player_attributes
+				const player_attributes = messageObject.player_attributes
+				console.log("incoming share_player_attributes message: ", player_attributes)
 				set(playerAttributesAtom, player_attributes)
-				
-				let usernames: string[] = []
-				Object.keys(player_attributes).forEach(function(key, value) {
+
+				const usernames: string[] = []
+				Object.keys(player_attributes).forEach(function(key, _value) {
 					usernames.push(key)
 				});
-				
+
 				set(listOfPlayersAtom, usernames)
-				
+
 			} else if (task === "broadcast_host_player") {
 				const host_player_id = messageObject.host_player_id
 				if (get(hostPlayerIDAtom) != host_player_id) {

@@ -1,18 +1,27 @@
-import { useEffect, useRef, useState } from "react";
+
+import { useEffect, useRef } from 'react';
 import { socketConnection } from "../socket/socket";
-import { sessionIDAtom, userPlayerIDAtom } from "../store/store";
-import Messages from "../types/Message";
-import Button from "./Button";
-import { useAtomValue } from "jotai";
-import { C2S_sendChat } from "../socket/C2SMessages";
+import { sessionIDAtom, userPlayerIDAtom } from '../store/store';
+import Button from './Button';
+import { useAtomValue, useSetAtom } from 'jotai';
+// import IncomingServerChatMessages from '../types/Message';
+// import NestedAnyObj from '../types/utility/NestedAnyObj';
+import { chatHandlerAtom, chatMessagesAtom } from '../store/chatHandler';
+
+interface ChatMsgs {
+    userName: string;
+    text: string
+}
 
 const ChatBox = () => {
-    const messageContainerRef = useRef(null);
     const sc = socketConnection;
-    const [messages, setMessages] = useState<Messages[]>(new Array<Messages>());
-    const input = useRef<HTMLInputElement>(null);
-    const userPlayerID = useAtomValue(userPlayerIDAtom);
-    const sessionID = useAtomValue(sessionIDAtom);
+    // const [messages, setMessages] = useState<ChatMsgs[]>(new Array<ChatMsgs>())
+    const chatHandler = useSetAtom(chatHandlerAtom);
+    const input = useRef<HTMLInputElement>(null)
+    const userPlayerID = useAtomValue(userPlayerIDAtom)
+    const sessionId = useAtomValue(sessionIDAtom) as string | null
+    const messages = useAtomValue(chatMessagesAtom)
+    // const players = useAtomValue(playerAttributesAtom) as NestedAnyObj
 
     const sendNewMessage = () => {
         if (input.current) {
@@ -22,32 +31,24 @@ const ChatBox = () => {
     };
 
     useEffect(() => {
-        // Listen for new messages from the WebSocket
         sc.on("chat_message", (message) => {
-            console.log(message);
-
-            setMessages([
-                ...messages,
-                { player_id: message.player_id, message: message.message },
-            ]);
-
-            // Create a new message element
-            // const messageElement = document.createElement('div');
-            // messageElement.textContent = message;
-            //
-            // // Append it to the message container
-            // messageContainerRef.current.appendChild(messageElement);
-            //
-            // // Optional: Auto-scroll to the bottom of the chat
-            // messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+            chatHandler(message)
         });
-    }, [sc]);
+
+        return () => {
+            sc.off("chat_message")
+        }
+    }, [sc, chatHandler]);
+
     const contents = () => {
-        return messages.map((msg: Messages) => {
-            return (
+        let keys = 0
+        return messages.map((msg: ChatMsgs) => {
+            return (<div key={keys++}>
                 <div>
-                    <div>{msg.player_id}</div>
-                    <div>{msg.message}</div>
+                    Player Name: {msg.userName}
+                </div>
+                <div>
+                    Message Text: {msg.text}
                 </div>
             );
         });
@@ -55,20 +56,18 @@ const ChatBox = () => {
 
     return (
         <div id="chatBoxContainer">
+            <div className="header">
+                <div className="header-title">Component Title</div>
+                <div className="header-buttons">
+                    <div className="button minimize" >-</div>
+                </div>
+            </div>
             <div
-                ref={messageContainerRef}
-                style={{
-                    height: "300px",
-                    overflowY: "scroll",
-                    border: "1px solid black",
-                }}
-            >
+                style={{ height: '300px', overflowY: 'scroll', border: '1px solid black', color: 'red' }} className="spaceContents">
                 {contents()}
             </div>
-            <input ref={input} type="" />
-            <Button bg="primary" onClick={sendNewMessage}>
-                Send Message
-            </Button>
+            <input className="baseInput" ref={input} type="" />
+            <Button bg="primary" onClick={sendNewMessage}>Send Message</Button>
         </div>
     );
 };
