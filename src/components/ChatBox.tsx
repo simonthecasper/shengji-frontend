@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 import { socketConnection } from "../socket/socket";
-import { sessionIDAtom, userPlayerIDAtom } from '../store/store';
+import { collapsedChatBoxAtom, sessionIDAtom, userPlayerIDAtom } from '../store/store';
 import Button from './Button';
 import { useAtomValue, useSetAtom } from 'jotai';
 // import IncomingServerChatMessages from '../types/Message';
@@ -21,6 +21,7 @@ const ChatBox = () => {
     const sessionId = useAtomValue(sessionIDAtom) as string | null
     const messages = useAtomValue(chatMessagesAtom)
     // const players = useAtomValue(playerAttributesAtom) as NestedAnyObj
+    const [collapsedChat, setCollapsedChat] = use(collapsedChatBoxAtom)
 
     const sendNewMessage = () => {
         if (input.current) {
@@ -46,7 +47,8 @@ const ChatBox = () => {
         }
     }, [sc, chatHandler]);
 
-    const contents = () => {
+
+    const contents = (): Element => {
         let keys = 0
         return messages.map((msg: ChatMsgs) => {
             return (<div key={keys++}>
@@ -61,6 +63,24 @@ const ChatBox = () => {
         })
     }
 
+    const getChatContents = () => {
+        let contents = <Fragment />
+
+        if (collapsedChat) {
+            contents = (
+                <>
+                    <div
+                        style={{ height: '300px', overflowY: 'scroll', border: '1px solid black', color: 'red' }} className="spaceContents">
+                        {contents()}
+                    </div>
+                    <input className="baseInput" ref={input} type="" />
+                    <Button bg="primary" onClick={sendNewMessage}>Send Message</Button>
+                </>
+            )
+        }
+        return contents
+    }
+
     return (
         <div id="chatBoxContainer">
             <div className="header">
@@ -69,13 +89,14 @@ const ChatBox = () => {
                     <div className="button minimize" >-</div>
                 </div>
             </div>
-            <div
-                style={{ height: '300px', overflowY: 'scroll', border: '1px solid black', color: 'red' }} className="spaceContents">
-                {contents()}
-            </div>
-            <input className="baseInput" ref={input} type="" />
-            <Button bg="primary" onClick={sendNewMessage}>Send Message</Button>
-        </div>
+            {getChatContents()}
+            // <div
+            //     style={{ height: '300px', overflowY: 'scroll', border: '1px solid black', color: 'red' }} className="spaceContents">
+            //     {contents()}
+            // </div>
+            // <input className="baseInput" ref={input} type="" />
+            // <Button bg="primary" onClick={sendNewMessage}>Send Message</Button>
+        </div >
     );
 };
 
