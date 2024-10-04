@@ -45,17 +45,6 @@ const GameSelector = () => {
                             >
                                 {game}
                             </Button>
-
-                            {/* <button
-                                className="gameTile"
-                                onClick={() => selectGame(game)}
-                                disabled={
-                                    game === selectedGame ||
-                                    userPlayerID != hostPlayerID
-                                }
-                            >
-                                {game}
-                            </button> */}
                         </div>
                     );
                 })}
