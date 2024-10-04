@@ -2,7 +2,7 @@ import { Fragment, useEffect, useRef } from 'react';
 import { socketConnection } from "../socket/socket";
 import { collapsedChatBoxAtom, sessionIDAtom, userPlayerIDAtom } from '../store/store';
 import Button from './Button';
-import { useAtomValue, useSetAtom } from 'jotai';
+import {useAtom, useAtomValue, useSetAtom} from 'jotai';
 // import IncomingServerChatMessages from '../types/Message';
 // import NestedAnyObj from '../types/utility/NestedAnyObj';
 import { chatHandlerAtom, chatMessagesAtom } from '../store/chatHandler';
@@ -21,7 +21,7 @@ const ChatBox = () => {
     const sessionId = useAtomValue(sessionIDAtom) as string | null
     const messages = useAtomValue(chatMessagesAtom)
     // const players = useAtomValue(playerAttributesAtom) as NestedAnyObj
-    const [collapsedChat, setCollapsedChat] = use(collapsedChatBoxAtom)
+    const [collapsedChat, setCollapsedChat] = useAtom(collapsedChatBoxAtom)
 
     const sendNewMessage = () => {
         if (input.current) {
@@ -48,7 +48,7 @@ const ChatBox = () => {
     }, [sc, chatHandler]);
 
 
-    const contents = (): Element => {
+    const contents = () => {
         let keys = 0
         return messages.map((msg: ChatMsgs) => {
             return (<div key={keys++}>
@@ -64,10 +64,10 @@ const ChatBox = () => {
     }
 
     const getChatContents = () => {
-        let contents = <Fragment />
+        let content = <Fragment />
 
         if (collapsedChat) {
-            contents = (
+            content = (
                 <>
                     <div
                         style={{ height: '300px', overflowY: 'scroll', border: '1px solid black', color: 'red' }} className="spaceContents">
@@ -78,7 +78,7 @@ const ChatBox = () => {
                 </>
             )
         }
-        return contents
+        return content
     }
 
     return (
@@ -90,12 +90,6 @@ const ChatBox = () => {
                 </div>
             </div>
             {getChatContents()}
-            // <div
-            //     style={{ height: '300px', overflowY: 'scroll', border: '1px solid black', color: 'red' }} className="spaceContents">
-            //     {contents()}
-            // </div>
-            // <input className="baseInput" ref={input} type="" />
-            // <Button bg="primary" onClick={sendNewMessage}>Send Message</Button>
         </div >
     );
 };
