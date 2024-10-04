@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from 'react';
 import { socketConnection } from "../socket/socket";
 import { sessionIDAtom, userPlayerIDAtom } from '../store/store';
@@ -24,17 +25,10 @@ const ChatBox = () => {
 
     const sendNewMessage = () => {
         if (input.current) {
-            const sender = {
-                session_id: sessionId,
-                player_id: userPlayerID,
-                message: input.current.value,
-                task: "send_chat",
-                stage: "chat"
-            }
-            sc.send(sender)
-            input.current.value = ""
+            C2S_sendChat(sessionID, userPlayerID, input.current.value);
+            input.current.value = "";
         }
-    }
+    };
 
     useEffect(() => {
         sc.on("chat_message", (message) => {
@@ -56,10 +50,9 @@ const ChatBox = () => {
                 <div>
                     Message Text: {msg.text}
                 </div>
-
-            </div>)
-        })
-    }
+            );
+        });
+    };
 
     return (
         <div id="chatBoxContainer">
